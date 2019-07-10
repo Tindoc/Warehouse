@@ -1,5 +1,9 @@
 # Debug List
 
+本项目 forked 自 [kavilee2012/Warehouse](https://github.com/kavilee2012/Warehouse)，原项目存在一点小问题，问题与解决如下：
+
+> 本 Repository 的 Warehouse_Desktop 已修复下列问题
+
 1. 菜单栏“成品入仓”界面的“入仓”提示“入仓失败”
     原因：数据库中表 “InW” 缺少列"Model(varchar(50))", "Machine(int)", "Length(int)"；表“InWDetail”缺少列"PrintCnt(int)", "Length(int)", "Model(varchar(50))"
 
