@@ -1,0 +1,470 @@
+1. 代码研究
+    1.1 项目 WareHouse
+        Program.cs(Main() 函数中的 `Application.Run(new frmLogin())` 得知启动程序时显示的是 frmLogin 窗口)
+        frmLogin.cs(保存用户名等信息到 Global 类中) => frmIndex.cs(主界面，其他窗体在本窗体中显示，MDI技术) => frmWarehouseView(库存查看，按批号) => frmViewDetail.cs(库存详情，看条码)
+        frmUser.cs(系统用户) => frmUserUpdate.cs(系统用户身份更改，恢复默认密码)
+        frmUpdatePwd.cs(系统用户修改个人密码)
+        frmLock.cs(锁定本软件)
+        frmGoodsIn.cs(入仓相关) => frmInDetail.cs(货物详情)
+        frmGoodsOut.cs(出仓相关) => frmBatchUpload.cs(批量上传条码的窗体)/frmSupplyReport.cs(打印出货单，数据报表技术) => Supply.rdlc(数据报表模板) => DataSet1.xsd(数据报表部分数据来源)
+        frmGoodsSearch.cs(出仓查询，即供货单查询)
+        frmStatistics.cs(统计查询，即按型号、规格显示入，出仓数量)
+        frmCompany.cs(软件使用公司信息，显示在送货单上)
+        frmCustomer.cs(顾客相关) => frmCustomerUpdate(顾客信息更新)
+        frmAgentNorm.cs(顾客代理级别相关，不同级别不同单价) => frmAgentNormUpdate.cs(代理级别信息更新)
+        frmGoodsNorm.cs(货物规格相关，货物规格对该司很重要) => frmGoodsNormUpdate.cs(货物规格信息更新)
+        [0引用的窗体(即没用的)：
+        frmSupplyDetail.cs => frmOutDetail.cs(大概是 frmSupplyReport 报表窗体的遗留代替产物)
+        frmStartScan.cs(大概是 frmGoodsOut 窗体的“即时扫描”功能的未实现产物)]
+        文件夹 Service(Model 层) 
+            Agent.cs
+            InW.cs
+            InWDetail.cs
+            Level.cs
+            Norm.cs
+            Supply.cs
+            SupplyDetail.cs
+            SupplyRPT.cs
+            User.cs
+            OutW.cs(无用)
+        文件夹 Properties
+            SupplyRPT.datasource (作为 frmSupplyReport.cs 中控件 SupplyPRTBindingSource 的数据源，使用了第15点的方法添加了一个以 SupplyRPT 为对象的的数据源)
+    1.2 项目 Common 
+        BarcodeService.cs       条形码打印设置
+        CommonService.cs        常用函数(其中被使用的有 GetParamValue(), SetParamName()(对表 Argument 操作), GetServerTime(), MoneyToChinese()(供货单使用))
+        DataGridViewService.cs  设置 dataGridView 的格式
+        Global.cs               用来存储软件运行期间使用的常量
+        INIService.cs           初始化内容，例如读取软件上次登录成功的登录名
+        MyLog.cs                用来保存日志
+        ValidateService.cs      验证生活常见字符串
+    1.3 项目 SqlServer
+        SqlHelper.cs(数据操作通用类，命名空间为 SQLServer) => SqlProvider.cs(针对 SQL Server 的数据操作类)
+        DBService.cs    备份数据库
+        DbHelperSQL.cs  与SqlHelper.cs功能相同，但本程序多数使用这个类的函数（该类的命名空间为 SQLServerDAL），而不是前者（怀疑重复）
+    1.4 数据库
+        (没有使用外键)
+        Agent 客户----------------------------------------------------------------
+            ID          int             自增
+            Name        varchar(50)     主键  公司名
+            Contact     varchar(50)     可空  联系人
+            Phone       varchar(50)     可空  手机
+            Address     varchar(200)    可空  地址
+            LevelName   varchar(50)     可空  代理级别
+            Tel         varchar(50)     可空  固定电话
+            Fox         varchar(50)     可空  传真
+        Argument 参数(用来保存公司信息)-------------------------------------------
+            ArgName     varchar(50)           包括四个参数：Name, Phone, Address, GoodsName        
+            ArgValue    varchar(50)     可空  参数值
+        InW 入仓记录--------------------------------------------------------------
+            ID          int             自增
+            Batch       varchar(50)     主键  货物批号
+            NormName    varchar(50)     可空  货物规格
+            Barcode     varchar(100)    可空  本批货物第一个条码~最后一个条码
+            CreateTime  datetime        可空  数据库内的记录生成时间(自动)
+            Operator    varchar(50)     可空  入仓记录人员
+            Cnt         int             可空  本批货物总件数
+            InTime      datetime        可空  货物入仓时间
+            BigCnt      int             可空  货物入仓大卷
+            Machine     int             可空  货物入仓机器
+            Length      int             可空  货物入仓米数
+            Model       varchar(50)     可空  货物型号
+        InWDetail 入仓记录详情----------------------------------------------------
+            Batch       varchar(50)     可空  货物批号
+            Barcode     varchar(50)     可空  货物条码
+            NormName    varchar(50)     可空  货物规格
+            Cnt         int             可空  货物件数
+            CreateTime  datetime        可空  数据库内的记录生成时间(自动)
+            PrintCnt    int             可空  货物条码打印次数
+            Length      int             可空  货物入仓米数
+            Model       varchar(50)     可空  货物型号
+        Level 代理级别------------------------------------------------------------
+            LevelID     int             自增
+            LevelName   varchar(50)     主键  代理级别名称
+            Price       money           可空  代理级别对应的价格
+        LevelPrice(没用)----------------------------------------------------------
+            ID          int             自增
+            LevelName   varchar(50)
+            ApplyDate   datetime
+            Price       money           可空
+            Operator    varchar(50)     可空
+            OperatorTime    datetime    可空
+        Norm 规格-----------------------------------------------------------------
+            NormID      int             主键  
+            NormName    varchar(50)     可空  规格
+        Supply 供应单-------------------------------------------------------------
+            ID          int             自增
+            SupplyID    varchar(50)     主键  供应单单号
+            AgentName   varchar(50)           客户名
+            Price       money                 单价
+            SumPrice    money                 总价(每一件货物的总价相加)
+            Operator    varchar(50)           记录填写人员
+            CreateTime  datetime              数据库内的记录生成时间(自动)
+        SupplyDetail 供应单详情---------------------------------------------------
+            SupplyID    varchar(50)           供应单单号
+            Barcode     varchar(50)           条码
+            NormName    varchar(50)     可空  货物规格
+            Price       money           可空  单价
+            SumMoney    money           可空  总价(单价*米数)
+            Cnt         int             可空  件数
+            CreateTime  datetime        可空  数据库内的记录生成时间(自动)
+            Length      int             可空  货物米数
+            Model       varchar(50)     可空  货物型号
+        User 系统用户-------------------------------------------------------------
+            UserID      int             自增
+            UserName    varchar(50)     主键  用户名
+            UserPwd     varchar(50)     可空  用户密码(默认密码：123456)
+            Position    varchar(50)     可空  身份权限
+2. 系统分析
+    2.1 公司情况
+        说明：入仓=入库，出仓=出库，供应单=送货单=供货单
+        本公司可能是商业流通企业(共三种形式：工业生产企业、商业流通企业，行政与事业单位)
+        基本流程：货物入仓-填写入仓记录(分配条码)-打印条码-给每件货物粘贴条码-填写供货单-打印供货单-货物出仓
+        入库是按批入的，每一批分配一个批号，批中的每一件货物分配一个条形码，用来粘贴在货物上标识货物；每次出货时填写一份送货单，每单一个送货单号
+        正常情况下一物一码，每个货物的条码只能打印一次，但管理员或系统管理员可重复多次打印货物条码
+        不同代理级别价格不同，虽然新建客户的时候设立了代理级别，但出货时选择了客户后可以不使用该客户新建时设置的的代理级别对应的价格，依然可以通过修改代理级别来修改价格
+        送货单总价计算：代理级别的单价*(货物1的规格*货物1的米数+货物2的规格*货物2的米数+....)
+    2.1 系统设计基础
+        不同权限用户可以使用的系统功能不同(frmIndex)
+        入仓批号、条码、送货单号的生成规则(详情见相关函数 frmGoodsIn(), frmGoodsOut())
+            入仓批号：P-1000-190708-123      P-规格(*1000)-yyMMdd-流水号
+            条码：1000-190708-2-3-25         规格(*1000)-yyMMdd-机器-卷数(又叫大卷)-流水号
+            送货单号：201907-0007            yyyyMM-流水号
+            每日入库批次(同规格)数最大为 999 批
+            每日入库货物(同规格、机器、大卷)数最大为 99 件
+            每月送货单数最大为 9999 张
+        同一批货物只要其中一个货物出仓后，就不可以删除该入仓批号(系统管理员可以)
+        普通用户不具有任何删除的权限
+    2.2 系统功能
+        1. 系统用户
+            用户显示/添加/检索/更新  frmUser.cs
+            密码修改(仅限个人修改) frmUpdatePwd.cs
+            软件锁定    frmLock.cs
+        2. 货物
+            2.1 入库
+                入库记录显示/添加/货物条形码打印/删除 frmGoodsIn.cs
+            2.2 出库
+                供货单填写/打印    frmGoodsOut.cs
+                供货单显示   frmGoodsSearch.cs
+            2.3 查看
+                库存查看(剩余数量)  frmWarehouseView.cs
+                统计查询(入、出库数量)    frmStatistics.cs
+        功能依赖：
+        3. 货物规格 GoodsNorm
+            (貌似这个公司主要以规格(还有型号)来区分自家的商品的，从系统管理只有“成品规格维护”以及“库存查看”也是按照规格划分来看的，或者是开发者没有完成)
+            货物规格显示/添加/删除 frmGoodsNorm.cs
+        4. 公司信息(打印供货单时显示)
+            显示/更新 frmCompany.cs
+        5. 客户 Customer
+            客户显示/添加/查询/更新/删除 frmCustomer.cs
+        6. 代理级别 AgentNorm(客户的代理级别，不同级别价格不一样)
+            代理级别显示/添加/更新 frmAgentNorm.cs
+        7. 供货单 Supply
+            打印供货单 frmSupplyDetail.cs
+            打印供货单 frmOutDetail.cs(实际上不做任何处理)
+    2.2 使用文档
+        使用“系统管理员”（用户名：“admin”，密码“123456”）登录系统
+        进入主界面后选择菜单“系统管理-修改个人密码”修改系统管理员的密码（请务必修改并记住系统管理员的密码）
+        选择菜单“系统管理-公司信息设置”填写公司信息（所需权限：系统管理员）
+        选择菜单“系统管理-成品规格维护”填写成品规格（所需权限：系统管理员）
+        选择菜单“系统管理-代理商级别维护”填写代理商级别（所需权限：系统管理员）
+        选择菜单“系统管理-用户管理”添加系统使用者（默认密码为“123456”，建议用户第一次登录时修改自身密码），可设置的权限为“管理员”或“普通用户”，
+            各用户权限如下：
+            系统管理员：商品管理-成品入仓/成品出仓/出仓查询/库存查看，
+                        客户管理-客户管理，
+                        系统管理-统计查询/用户管理/成品规格维护/代理商级别维护/公司信息设置/修改个人密码/退出，
+                        锁定
+            管理员：    商品管理-成品入仓(无法删除包含已出仓货物的批号)/成品出仓/出仓查询/库存查看，
+                        客户管理-客户管理，
+                        系统管理-统计查询/修改个人密码/退出，
+                        锁定
+            普通用户：  商品管理-成品入仓(无法删除/无法已打印的条形码)/成品出仓/出仓查询(无法删除)/库存查看，
+                        系统管理-修改个人密码/退出，
+                        锁定
+        选择菜单“客户管理-客户管理”添加客户（所需权限：系统管理员、管理员）
+        选择菜单“系统管理-统计查询”可以查看商品的入/出仓情况（所需权限：系统管理员、管理员）
+        选择菜单“商品管理-成品入仓/成品出仓/出仓查询/库存查看”对应相关的功能（任何用户可操作）
+        在软件使用者暂时不使用软件时，可以使用菜单“锁定”来锁定系统，保证信息安全（任何用户可操作）
+
+
+2. 项目引用动态链接库(xxx.dll)的方法(编译时加载动态运行库，对比9)：
+    2.1 在项目中设置 "DLL" 的文件夹，将动态链接库放入其中
+    2.2 在项目的“引用”中添加动态链接库的引用
+3. A 项目引用 B 项目的类的方法：
+    3.1 在项目A的“引用”中添加需要引用的项目(项目B)
+    3.2 在项目A中 “using 命名空间名” 来指定引用项目(项目B)的命名空间
+4. 窗体间跳转的方法（x2）：
+    4.1 以打开新窗口的方式跳转：
+        ``` C#
+        frmA a = new frmA();
+        this.Hide();
+        a.ShowDialog();
+        ```
+        - 问题：这样做会不会一直占用内存，导致资源紧张？毕竟只是 Hide()
+    4.2 在本窗体的 Panel 中跳转：
+        4.1.1 设置本窗体的 IsMdiContainer 属性为 True，添加控件 panel
+        4.1.2 调用自定义函数
+            ``` C#
+            public void ShowFrom(Form fm)
+            {
+                panel1.Controls.Clear();
+                
+                fm.MdiParent = this;
+                fm.Parent = panel;
+                fm.Dock = DockStyle.Fill; // 使B窗体填充在panel中
+                fm.FormBorderStyle = FormBorderStyle.None; // 设置B窗体的边框为无
+                fm.Show();
+            }
+            ```
+    4.3 回到跳转的窗体（即从A窗体跳到B窗体，现在需要回到A窗体）
+        作用：可以用来实现系统锁屏类似的锁定本程序
+        ``` C#
+        // frmA.cs
+        frmA a = new frmA();
+        a.Owner = this; // 注意！
+        this.Hide();
+        a.ShowDialog();
+        
+        // frmB.cs
+        Owner.Show();
+        this.Close();
+        ```
+    4.4 注意的地方
+        4.4.1 frm.Show() 与 frm.ShowDialog() 的区别
+            frm.Show() 为非模态显示，可以操作其他窗口
+            frm.ShowDialog()为模态显示，不允许操作其他窗口
+        4.4.2 this.Hide() 与 this.Close() 的区别(@ 未验证)
+            this.Hide() 只是将本窗体隐藏起来，所有的申请的资源不释放
+            this.Close() 会释放本窗体使用的所有资源
+5. 可以判断窗体关闭的原因来进行不同的操作
+    ``` C#
+    private void frmLock_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        if (e.CloseReason == CloseReason.UserClosing)
+        {
+            // ......
+        } else {
+            // ......
+        }
+    }
+    ```
+    - 作用不详？？？？？？？？？？？？？？？？？？？？？？
+6. 从 DLL 中添加控件
+    在“工具箱”中点击鼠标右键，选择“选择项”
+    在“浏览”中找到 DLL 文件的位置，点击“确定”
+7. 判断字符串不为 null 或 空
+    `string.IsNullOrEmpty(s);`
+8. 代码规范
+    8.1 函数命名：
+        GenXXXX()     生成XXXX
+        GetXXXX()     获取XXXX
+        BindXXXX()    XXXX数据获取/更新
+    8.2 控件的命名前加控件类型：
+        cbx_    ComboBox
+        txt_    TextBox
+        rb_     RadioButton
+        btn_    Button
+        lab_    Label
+        frm_    Form
+    8.3 类内私有数据成员全部使用 "_xxx" 的命名方式
+9. 项目运行时加载动态链接库的方法：（运行时动态链接）
+    ``` C#
+    using System.Runtime.InteropServices;
+    
+    [DllImport("TSCLIB.dll", EntryPoint = "about")] // 指明DLL文件名以及方法名
+    public static extern int about();
+    ```
+    来自：BarcodeService.cs 
+    对比2的编译时加载动态链接库的方法（载入时动态链接）
+10. 可以通过 `Application.StartupPath` 获得本执行文件(exe文件)所在的路径
+11. 使用正则表达式
+    ``` C#
+    using System.Text.RegularExpressions;
+    
+    Regex rg = new Regex(@"正则表达式");
+    Match mc = rg.Match(验证的字符串);
+    return (mc.Success);
+    ```
+12. `#region 区域名` 和 `#endregion` 是用来划分代码块的，与注释差不多
+13. SQL Server 数据库文件的恢复，可以到 “C:\Program Files\Microsoft SQL Server\MSSQL<版本号>.<实例名>\MSSQL\DATA” 中将相关数据库的 xxx.mdf 和 xxx_log.ldf 复制出来，将这两个文件复制到服务器的相同目录，再在 SSMS 中 “数据库” 点击鼠标右键选择 “附加”，选择两个文件的位置即可
+14. 远程连接 SQL Server 数据库需要注意的事情
+    - 可以使用 “SQLServer<年号>配置管理器”软件 来启动或停止SQLServer服务，下面1~2的设置应该都可以在安装的时候设置，所以不一定需要安装 SSMS
+    0. 确保客户机能够 ping 通装有 SQL Server 的服务器
+    1. 在 SSMS 的 “属性-安全性” 设置 “SQL Server 和 Windows 身份验证模式”
+        (如果在安装时没有设置 sa 账户的密码可能需要输入)
+    2. 在 SSMS 的 “属性-连接” 设置 “允许远程连接到此服务器”
+    3. 打开 “配置管理器”，“SQL Server 网络配置 => SQLEXPRESS 的协议- TCP/IP” 设置为 “已启用”(可以在属性中修改端口)
+    4. 在防火墙中新建 “入站规则”，其中“要创建的规则类型”选择“程序”，程序路径为“C:\Program Files\Microsoft SQL Server\MSSQL<版本号>.<数据库实例名>\MSSQL\Binn\sqlservr.exe”
+    5. 在 Visual Studio 中 “添加连接” 中的服务器名为 “<IP或服务器名>, <端口号>\<数据库实例名>”
+15. 可以添加以类为基础的数据源
+    - 作用不详？？？？？？？？？？？？？？？？？？？？？？强类型 dataSource？？？？？？？？？？？？
+    “数据” -> “添加新数据源” -> “对象”，选择需要绑定的对象
+16. 可以为应用程序添加“报表”
+    “添加” => “新建项” => “报表”
+    然后在工具箱中拖动内容到报表中
+17. 问题“无法添加该列，原因是它被冻结并被置于未冻结的列之后”解决：
+    1. 在窗体的 Load 事件中添加 dataGridView1.AutoGenerateColumns = false;
+    2. 如果是复制窗体设计而来的，很有可能是 dataGridView 的列设置在 dataGridView 的设置之后了，查看 XXXX.Designer.cs 文件
+18. 在 Visual Studio 中修改数据库的表定义时，建议设置
+    选项 => 数据库工具 => 表设计器和数据库设计器 => 防止保存需要重新创建表的更改(取消勾选)
+19. 包含多个项目的解决方案的 `xxx.sln` 文件设置在包含的项目外的方法
+    19.1 新建一个空白解决方案
+    19.2 编写应用程序的主入口点
+        ``` C#
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(AppThreadException);    // 添加异常处理函数
+            Application.Run(new frmLogin());   // 重点
+        }
+
+        /// <summary>
+        /// 异常处理函数
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
+        private static void AppThreadException(object source, System.Threading.ThreadExceptionEventArgs e)
+        {
+            string errorMsg = string.Format("未处理异常: \n{0}\n", e.Exception.Message + "         详细：\n" + e.Exception);
+            MyLog.WriteLog(e.Exception);
+
+            MessageBox.Show("\n  发生系统异常!\t\t\n", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        ```
+    19.3 复制其他项目到该解决方案下或者在该解决方案中新建项目 
+20. 可以使用 Visual Studio 的 “体系结构-生成依赖关系图-按类” 查看类的相互调用关系
+    优点：可以跨项目查看调用和定义（如果使用鼠标右键的“转到定义”只能查看到元数据里面的函数声明，“查看所有引用”查看不到跨项目的引用）
+    使用建议：按住 “ctrl” 键鼠标会变成抓手，可移动显示界面，此时使用鼠标滚轮还可以放大缩小显示界面
+21. SQL 语句
+    ``` sql
+    # 获取按 Batch 列降序排列的行的 Batch 列数据的第一个（TOP() 还可以用来实现分页）
+        SELECT TOP(1) Batch FROM InW ORDER BY Batch DESC;   
+    # 获取 Batch 列前11位是‘xxx’字符串对应的行的 Batch 列的前3位字符串（可能只能为字符串数据类型才可以）
+        SELECT RIGHT(Batch,3) FROM InW WHERE LEFT(Batch,11)='xxx';  
+    # 获取服务器时间
+        SELECT GETDATE();  
+    ```
+22. 如何给 dataGridView1 的行中没有内容的列添加内容
+    在 dataGridView1 的 `CellFormatting` 事件中添加如下代码
+    ``` C#
+    if (e.ColumnIndex == dataGridView1.Columns["ColumnName"].Index)
+    {
+        e.Value = "需要显示的内容";
+    }
+    ```
+    用处：可以用在直接在列上添加了一些操作功能（例如：手动实现删除本列的功能(dataGridView本身包含删除的事件)）时在行中对应位置显示“删除”这两个字
+    如果要实现“删除”功能的话则需要在 dataGridView1 的 `CellContentClick` 事件中添加如下代码
+    ``` C#
+    if (e.ColumnIndex == dataGridView1.Columns["ColumnName_del"].Index) // 判断点击的是哪列
+    {
+        // 获取某个 ID 号，根据该号执行删除功能（如果ID号不需要显示在 dataGridView 中，可以添加该列但不显示出来）
+    }
+    ```
+23. 如何给 dataGridView 添加不是数据查询的行
+    在获取/更新数据源的时候为 dataGridView 的数据来源对象(例如，dataTable)添加一个 dataRow 对象，用来设置特定的格式即可
+24. 可以使用 dataGridView 的 `RowPostPaint` 事件设置单元格的样式
+22.23.24 总结：dataGridView 的`RowPostPaint`用来设置整体统一的显示格式(颜色、文字居中等)，`CellFormatting`用来对特定行、列、单元格设置显示格式(颜色、文字内容等)，`CellContentClick`用来对特定行、列、单元格点击时执行的动作
+25. “分页” 功能的实现：
+    ``` C#
+    /// <summary>
+    /// 分页获取数据列表
+    /// </summary>
+    /// <param name="PageSize">每页记录条数</param>
+    /// <param name="PageIndex">当前页</param>
+    /// <param name="strWhere">查询条件</param>
+    /// <param name="count">总共记录条数</param>
+    /// <returns></returns>
+    public DataSet GetPageList(int PageSize, int PageIndex, string strWhere, out int count)
+    {
+        string strSql = "";
+        if (PageIndex == 1) {
+            strSql += "select TOP " + PageSize + " * FROM [InW] A";
+        } else {
+            int sumSize = PageSize * (PageIndex - 1);   // 把需要的记录的前面记录剔除掉，例如：每页10条，需要第三页，则把前10*(3-1)=20条去掉（NOT IN）
+            strSql += "select TOP " + PageSize + " * FROM [InW] A WHERE Batch NOT IN(select TOP " + sumSize + " Batch FROM [InW] ORDER BY ID DESC)";
+        }
+        string strCnt = "SELECT count(id) FROM InW ";   // 总记录条数
+        if (strWhere.Trim() != "") {
+            strSql += " where " + strWhere;
+            strCnt += " where " + strWhere;
+        }
+        strSql += " ORDER BY A.ID DESC";
+
+        count = (int)DbHelperSQL.GetSingle(strCnt); // 执行获取总记录条数的函数
+        return DbHelperSQL.Query(strSql);           // 执行返回结果为 dataSet 的 SQL 语句的函数
+    }
+    ```
+26. 判断条件查询 SQL 的巧妙设置办法:
+    每一个条件判断一次，每个条件语句的结尾都加上“AND”，最后将末尾的“AND”去掉，这样可以不用考虑条件的顺序
+    ``` C#
+    if (!string.IsNullOrEmpty(_id))
+    {
+        sqlWhere += " SupplyID LIKE'%" + _id + "%' AND";
+    }
+    if (!string.IsNullOrEmpty(_agent))
+    {
+        sqlWhere += " AgentName='" + _agent + "' AND";
+    }
+    if (!string.IsNullOrEmpty(_barcode))
+    {
+        sqlWhere += " SupplyID IN(SELECT DISTINCT SupplyID FROM SupplyDetail WHERE Barcode LIKE'%" + _barcode + "%') AND";
+    }
+    if (sqlWhere.Contains("AND"))
+    {
+        sqlWhere = sqlWhere.Substring(0, sqlWhere.Length - 3);  // 将末尾的 And 字符串去掉
+    }
+    ```
+    
+@ Confuse
+
+@ Q&A
+1. frmGoodsOut 的“即时扫描”是即时查数据库还是查 Model，如果是后者什么时候查的数据库
+    答：IList<InW> allOut 用来保存条码记录对应的 InW 对象，在输入条码的时候(txt_Barcode_TextChanged() 和 link_Upload_Click()函数)新建一个以该条码为特征的 IW 对象，判断该对象是否重复(foreach i in allOut)或已出仓(判断 Model 的某个数据成员)，如果没有的话则添加到 allOut 中
+2. frmGoodsOut 选择了级别和客户之后 dataGridView 的数据自动更新是怎么实现的
+    答：dataGridView 绑定的是 AllOut 列表，选择了级别和客户后，AllOut 列表中 InW 对象的数据成员单价和总价改变，所以 dataGricView 的显示数据也跟着改变
+3. frmCustomer 的查询功能是不是只有以客户名称为条件
+    答：是的
+4. frmWareHouse 的 dataGridView 的“详情”是什么时候查询的？
+    答：点击之后生成了 frmViewDetial 对象，对象的加载事件使用 SQL 语句现查的
+5. frmWareHouse 的“总计”行是怎么实现的？
+    答：为 dataGridView 的数据来源 dataTable 添加一个 DataRow，设置该行的格式即可；颜色是在 cellFormatting 事件中实现
+6. frmGoodsSearch 在不指定任何特定条件的情况下如何实现查询所有数据的
+    答：先判断条件有没有被选择，选择了的话就向查询 SQL 语句的条件部分添加条件，注意这里的 SQL 的设置很巧妙，每个条件都以 “AND” 结尾，这样方便了条件的串联，无需考虑顺序，到最后如果包含了条件的话就将最后的“AND”删除
+7. frmViewDetail 的条码怎么查询的
+    答：在窗体的 Load 事件中使用 sql 语句查询
+
+@ Testing
+
+@ Debug
+3. 菜单栏“成品入仓”界面的“入仓”提示“入仓失败”
+    原因：数据库中表 “InW” 缺少列"Model(varchar(50))", "Machine(int)", "Length(int)"；表“InWDetail”缺少列"PrintCnt(int)", "Length(int)", "Model(varchar(50))"
+4. “系统管理-公司信息设置”异常
+    原因：数据库中缺少表 Argument(从项目 Common 的 Common Service 的函数 GetParamValue() 和 SetParamValue() 可以看出操作的这个表)，创建表 Argument(ArgName(varchar(50)), ArgValue(varchar(150)))，添加数据((Name, null), (Phone, null), (Address, null), (GoodsName, null))即可
+5. “成品出仓-生成供货单”失败
+    原因：数据库中表 SupplyDetails 缺少列 "Length(int)", "Model(varchar(50))" 
+6. 打开了 frmSupplyReport 窗体之后关闭程序弹出警告““System.CannotUnloadAppDomainException”类型的未经处理的异常出现在 mscorlib.dll 中。其他信息: 卸载 Appdomain 时出错。 (异常来自 HRESULT:0x80131015)”，
+    原因：MS ReportViewer 控件的已知 Bug(https://stackoverflow.com/questions/9061808/how-to-handle-a-system-cannotunloadappdomainexception)
+    解决：在窗体中的 formClosing 事件中添加如下代码：
+        ``` C#
+        reportViewer1.LocalReport.ReleaseSandboxAppDomain();
+        ```
+    其他：ReportViewer 不是自带的控件，需要安装，下载地址:https://www.microsoft.com/zh-cn/download/details.aspx?id=6576
+
+@ Todo
+4. 整理文档
+5. 整理数据库，分析表；其中InWDetail表删除Cnt列（一货一码，应该不用Cnt），Debug的第1，2，3点，查看对应的 SQL 语句；InW表和InWDetail表的列可能存在重复，但具体要不要删除要看 SQL 语句
+10. 修改软件的控件的 Tab 顺序
+2. 改写 SqlHelper.cs 实现抽象工厂模式的三层架构
+3. 改写 DBService.cs 实现数据的备份和还原功能
+6. 学习报表的使用
+7. 学习 MDI 的使用 https://docs.microsoft.com/zh-cn/dotnet/framework/winforms/advanced/multiple-document-interface-mdi-applications 
+8. 学习int? 的意义
+9. 学习frmIndex 的“即时扫描”功能
+11. 学习分页控件的使用
+12. 学习从关闭的窗体传递信息给其他窗体(frmGoodsOut)，可能会了解到窗体关闭并不表示对象删除
+13. 学习 dataGridView 中最后一列显示总计的实现(frmWareaHouse)
+5. 了解 Windows 系统的用户管理
+7. 了解TSC打印机设置(BarcodeService类)
+12. 了解客户端付费使用的实现(frmLogin.cs 里面的方法有点麻烦，过期了重新编译一次再安装？)
+13. 变成通用程序，自由添加条件什么的，减少公司类型的限制
