@@ -44,7 +44,7 @@
             this.txt_UserName.Location = new System.Drawing.Point(111, 39);
             this.txt_UserName.Name = "txt_UserName";
             this.txt_UserName.Size = new System.Drawing.Size(131, 21);
-            this.txt_UserName.TabIndex = 1;
+            this.txt_UserName.TabIndex = 0;
             this.txt_UserName.Text = "admin";
             // 
             // btn_Login
@@ -52,7 +52,7 @@
             this.btn_Login.Location = new System.Drawing.Point(103, 201);
             this.btn_Login.Name = "btn_Login";
             this.btn_Login.Size = new System.Drawing.Size(75, 23);
-            this.btn_Login.TabIndex = 8;
+            this.btn_Login.TabIndex = 1;
             this.btn_Login.Text = "登  录";
             this.btn_Login.UseVisualStyleBackColor = true;
             this.btn_Login.Click += new System.EventHandler(this.btn_Login_Click);
@@ -62,7 +62,7 @@
             this.txt_UserPwd.Location = new System.Drawing.Point(111, 90);
             this.txt_UserPwd.Name = "txt_UserPwd";
             this.txt_UserPwd.Size = new System.Drawing.Size(131, 21);
-            this.txt_UserPwd.TabIndex = 2;
+            this.txt_UserPwd.TabIndex = 1;
             this.txt_UserPwd.UseSystemPasswordChar = true;
             // 
             // panel1
@@ -75,7 +75,7 @@
             this.panel1.Location = new System.Drawing.Point(40, 38);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(288, 152);
-            this.panel1.TabIndex = 10;
+            this.panel1.TabIndex = 0;
             // 
             // label1
             // 
@@ -110,7 +110,7 @@
             this.btn_Cancel.Location = new System.Drawing.Point(195, 201);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
-            this.btn_Cancel.TabIndex = 9;
+            this.btn_Cancel.TabIndex = 2;
             this.btn_Cancel.Text = "取  消";
             this.btn_Cancel.UseVisualStyleBackColor = true;
             // 

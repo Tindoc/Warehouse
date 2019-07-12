@@ -95,7 +95,7 @@
             this.txt_Tel.Location = new System.Drawing.Point(778, 32);
             this.txt_Tel.Name = "txt_Tel";
             this.txt_Tel.Size = new System.Drawing.Size(78, 21);
-            this.txt_Tel.TabIndex = 18;
+            this.txt_Tel.TabIndex = 4;
             // 
             // cLevel
             // 
@@ -112,60 +112,6 @@
             this.cName.HeaderText = "客户名称";
             this.cName.Name = "cName";
             this.cName.ReadOnly = true;
-            // 
-            // cContact
-            // 
-            this.cContact.DataPropertyName = "Contact";
-            this.cContact.Frozen = true;
-            this.cContact.HeaderText = "联系人";
-            this.cContact.Name = "cContact";
-            this.cContact.ReadOnly = true;
-            // 
-            // cPhone
-            // 
-            this.cPhone.DataPropertyName = "Phone";
-            this.cPhone.Frozen = true;
-            this.cPhone.HeaderText = "手机号码";
-            this.cPhone.Name = "cPhone";
-            this.cPhone.ReadOnly = true;
-            // 
-            // cTel
-            // 
-            this.cTel.DataPropertyName = "Tel";
-            this.cTel.Frozen = true;
-            this.cTel.HeaderText = "固定电话";
-            this.cTel.Name = "cTel";
-            this.cTel.ReadOnly = true;
-            // 
-            // cFox
-            // 
-            this.cFox.DataPropertyName = "Fox";
-            this.cFox.Frozen = true;
-            this.cFox.HeaderText = "传真";
-            this.cFox.Name = "cFox";
-            this.cFox.ReadOnly = true;
-            // 
-            // cAddress
-            // 
-            this.cAddress.DataPropertyName = "Address";
-            this.cAddress.Frozen = true;
-            this.cAddress.HeaderText = "地址";
-            this.cAddress.Name = "cAddress";
-            this.cAddress.ReadOnly = true;
-            this.cAddress.Width = 250;
-            // 
-            // cDel
-            // 
-            this.cDel.ActiveLinkColor = System.Drawing.Color.Blue;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.cDel.DefaultCellStyle = dataGridViewCellStyle3;
-            this.cDel.Frozen = true;
-            this.cDel.HeaderText = "";
-            this.cDel.MinimumWidth = 60;
-            this.cDel.Name = "cDel";
-            this.cDel.ReadOnly = true;
-            this.cDel.VisitedLinkColor = System.Drawing.Color.Blue;
-            this.cDel.Width = 60;
             // 
             // dataGridView1
             // 
@@ -221,12 +167,66 @@
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             // 
+            // cContact
+            // 
+            this.cContact.DataPropertyName = "Contact";
+            this.cContact.Frozen = true;
+            this.cContact.HeaderText = "联系人";
+            this.cContact.Name = "cContact";
+            this.cContact.ReadOnly = true;
+            // 
+            // cPhone
+            // 
+            this.cPhone.DataPropertyName = "Phone";
+            this.cPhone.Frozen = true;
+            this.cPhone.HeaderText = "手机号码";
+            this.cPhone.Name = "cPhone";
+            this.cPhone.ReadOnly = true;
+            // 
+            // cTel
+            // 
+            this.cTel.DataPropertyName = "Tel";
+            this.cTel.Frozen = true;
+            this.cTel.HeaderText = "固定电话";
+            this.cTel.Name = "cTel";
+            this.cTel.ReadOnly = true;
+            // 
+            // cFox
+            // 
+            this.cFox.DataPropertyName = "Fox";
+            this.cFox.Frozen = true;
+            this.cFox.HeaderText = "传真";
+            this.cFox.Name = "cFox";
+            this.cFox.ReadOnly = true;
+            // 
+            // cAddress
+            // 
+            this.cAddress.DataPropertyName = "Address";
+            this.cAddress.Frozen = true;
+            this.cAddress.HeaderText = "地址";
+            this.cAddress.Name = "cAddress";
+            this.cAddress.ReadOnly = true;
+            this.cAddress.Width = 250;
+            // 
+            // cDel
+            // 
+            this.cDel.ActiveLinkColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.cDel.DefaultCellStyle = dataGridViewCellStyle3;
+            this.cDel.Frozen = true;
+            this.cDel.HeaderText = "";
+            this.cDel.MinimumWidth = 60;
+            this.cDel.Name = "cDel";
+            this.cDel.ReadOnly = true;
+            this.cDel.VisitedLinkColor = System.Drawing.Color.Blue;
+            this.cDel.Width = 60;
+            // 
             // txt_Fox
             // 
             this.txt_Fox.Location = new System.Drawing.Point(80, 71);
             this.txt_Fox.Name = "txt_Fox";
             this.txt_Fox.Size = new System.Drawing.Size(78, 21);
-            this.txt_Fox.TabIndex = 20;
+            this.txt_Fox.TabIndex = 5;
             // 
             // label6
             // 
@@ -242,7 +242,7 @@
             this.btn_Search.Location = new System.Drawing.Point(778, 69);
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(59, 23);
-            this.btn_Search.TabIndex = 16;
+            this.btn_Search.TabIndex = 8;
             this.btn_Search.Text = "查询";
             this.btn_Search.UseVisualStyleBackColor = true;
             this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
@@ -252,7 +252,7 @@
             this.btn_Add.Location = new System.Drawing.Point(704, 70);
             this.btn_Add.Name = "btn_Add";
             this.btn_Add.Size = new System.Drawing.Size(59, 23);
-            this.btn_Add.TabIndex = 15;
+            this.btn_Add.TabIndex = 7;
             this.btn_Add.Text = "增加";
             this.btn_Add.UseVisualStyleBackColor = true;
             this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
@@ -262,14 +262,14 @@
             this.txt_Address.Location = new System.Drawing.Point(255, 71);
             this.txt_Address.Name = "txt_Address";
             this.txt_Address.Size = new System.Drawing.Size(232, 21);
-            this.txt_Address.TabIndex = 14;
+            this.txt_Address.TabIndex = 6;
             // 
             // txt_Contact
             // 
             this.txt_Contact.Location = new System.Drawing.Point(420, 33);
             this.txt_Contact.Name = "txt_Contact";
             this.txt_Contact.Size = new System.Drawing.Size(67, 21);
-            this.txt_Contact.TabIndex = 13;
+            this.txt_Contact.TabIndex = 2;
             // 
             // pagerControl1
             // 
@@ -294,7 +294,7 @@
             this.cbx_Level.Location = new System.Drawing.Point(255, 32);
             this.cbx_Level.Name = "cbx_Level";
             this.cbx_Level.Size = new System.Drawing.Size(75, 20);
-            this.cbx_Level.TabIndex = 12;
+            this.cbx_Level.TabIndex = 1;
             // 
             // panel1
             // 
@@ -313,14 +313,14 @@
             this.txt_Phone.Location = new System.Drawing.Point(585, 32);
             this.txt_Phone.Name = "txt_Phone";
             this.txt_Phone.Size = new System.Drawing.Size(94, 21);
-            this.txt_Phone.TabIndex = 11;
+            this.txt_Phone.TabIndex = 3;
             // 
             // txt_Name
             // 
             this.txt_Name.Location = new System.Drawing.Point(80, 32);
             this.txt_Name.Name = "txt_Name";
             this.txt_Name.Size = new System.Drawing.Size(78, 21);
-            this.txt_Name.TabIndex = 10;
+            this.txt_Name.TabIndex = 0;
             // 
             // label1
             // 
@@ -381,7 +381,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 9);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(884, 114);
-            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "详细信息";
             // 

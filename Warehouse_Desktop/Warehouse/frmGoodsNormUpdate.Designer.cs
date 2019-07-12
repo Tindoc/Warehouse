@@ -59,7 +59,7 @@
             this.btn_Modity.Location = new System.Drawing.Point(185, 170);
             this.btn_Modity.Name = "btn_Modity";
             this.btn_Modity.Size = new System.Drawing.Size(75, 23);
-            this.btn_Modity.TabIndex = 18;
+            this.btn_Modity.TabIndex = 1;
             this.btn_Modity.Text = "确认修改";
             this.btn_Modity.UseVisualStyleBackColor = true;
             this.btn_Modity.Click += new System.EventHandler(this.btn_Modity_Click);
@@ -69,7 +69,7 @@
             this.txt_Name.Location = new System.Drawing.Point(197, 118);
             this.txt_Name.Name = "txt_Name";
             this.txt_Name.Size = new System.Drawing.Size(93, 21);
-            this.txt_Name.TabIndex = 17;
+            this.txt_Name.TabIndex = 0;
             // 
             // label1
             // 

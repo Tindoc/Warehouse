@@ -42,7 +42,7 @@
             this.cbx_Pwd.Location = new System.Drawing.Point(155, 175);
             this.cbx_Pwd.Name = "cbx_Pwd";
             this.cbx_Pwd.Size = new System.Drawing.Size(108, 16);
-            this.cbx_Pwd.TabIndex = 30;
+            this.cbx_Pwd.TabIndex = 1;
             this.cbx_Pwd.Text = "恢复为默认密码";
             this.cbx_Pwd.UseVisualStyleBackColor = true;
             // 
@@ -51,7 +51,7 @@
             this.btn_Modity.Location = new System.Drawing.Point(176, 244);
             this.btn_Modity.Name = "btn_Modity";
             this.btn_Modity.Size = new System.Drawing.Size(75, 23);
-            this.btn_Modity.TabIndex = 29;
+            this.btn_Modity.TabIndex = 2;
             this.btn_Modity.Text = "确认修改";
             this.btn_Modity.UseVisualStyleBackColor = true;
             this.btn_Modity.Click += new System.EventHandler(this.btn_Modity_Click);
@@ -75,7 +75,7 @@
             this.cbx_Position.Location = new System.Drawing.Point(176, 120);
             this.cbx_Position.Name = "cbx_Position";
             this.cbx_Position.Size = new System.Drawing.Size(107, 20);
-            this.cbx_Position.TabIndex = 27;
+            this.cbx_Position.TabIndex = 0;
             // 
             // label1
             // 

@@ -41,21 +41,21 @@
             this.txt_New.Location = new System.Drawing.Point(130, 120);
             this.txt_New.Name = "txt_New";
             this.txt_New.Size = new System.Drawing.Size(100, 21);
-            this.txt_New.TabIndex = 12;
+            this.txt_New.TabIndex = 1;
             // 
             // txt_Old
             // 
             this.txt_Old.Location = new System.Drawing.Point(131, 70);
             this.txt_Old.Name = "txt_Old";
             this.txt_Old.Size = new System.Drawing.Size(100, 21);
-            this.txt_Old.TabIndex = 11;
+            this.txt_Old.TabIndex = 0;
             // 
             // btn_Cancel
             // 
             this.btn_Cancel.Location = new System.Drawing.Point(169, 182);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
-            this.btn_Cancel.TabIndex = 10;
+            this.btn_Cancel.TabIndex = 3;
             this.btn_Cancel.Text = "取消";
             this.btn_Cancel.UseVisualStyleBackColor = true;
             this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
@@ -65,7 +65,7 @@
             this.btn_Sure.Location = new System.Drawing.Point(73, 182);
             this.btn_Sure.Name = "btn_Sure";
             this.btn_Sure.Size = new System.Drawing.Size(75, 23);
-            this.btn_Sure.TabIndex = 9;
+            this.btn_Sure.TabIndex = 2;
             this.btn_Sure.Text = "确定";
             this.btn_Sure.UseVisualStyleBackColor = true;
             this.btn_Sure.Click += new System.EventHandler(this.btn_Sure_Click);

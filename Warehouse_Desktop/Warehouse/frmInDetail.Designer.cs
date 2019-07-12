@@ -33,10 +33,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.cbx_All = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.lab_Batch = new System.Windows.Forms.Label();
             this.cSel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.cBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cPrintCnt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lab_Batch = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +45,7 @@
             this.button1.Location = new System.Drawing.Point(223, 539);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 42);
-            this.button1.TabIndex = 10;
+            this.button1.TabIndex = 1;
             this.button1.Text = "打印选中条码";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -93,18 +93,8 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(606, 451);
-            this.dataGridView1.TabIndex = 12;
+            this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
-            // 
-            // lab_Batch
-            // 
-            this.lab_Batch.AutoSize = true;
-            this.lab_Batch.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lab_Batch.Location = new System.Drawing.Point(173, 21);
-            this.lab_Batch.Name = "lab_Batch";
-            this.lab_Batch.Size = new System.Drawing.Size(246, 20);
-            this.lab_Batch.TabIndex = 11;
-            this.lab_Batch.Text = "入仓批号：20141114XXXX";
             // 
             // cSel
             // 
@@ -128,6 +118,16 @@
             this.cPrintCnt.HeaderText = "已打印次数";
             this.cPrintCnt.Name = "cPrintCnt";
             this.cPrintCnt.ReadOnly = true;
+            // 
+            // lab_Batch
+            // 
+            this.lab_Batch.AutoSize = true;
+            this.lab_Batch.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lab_Batch.Location = new System.Drawing.Point(173, 21);
+            this.lab_Batch.Name = "lab_Batch";
+            this.lab_Batch.Size = new System.Drawing.Size(246, 20);
+            this.lab_Batch.TabIndex = 11;
+            this.lab_Batch.Text = "入仓批号：20141114XXXX";
             // 
             // frmInDetail
             // 

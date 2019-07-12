@@ -44,13 +44,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txt_Operator = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btn_Add = new System.Windows.Forms.Button();
-            this.cbx_Cnt = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbx_Big = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.cInTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cBatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,6 +56,13 @@
             this.cOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cPrint = new System.Windows.Forms.DataGridViewLinkColumn();
             this.cDel = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btn_Add = new System.Windows.Forms.Button();
+            this.cbx_Cnt = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbx_Big = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -74,7 +74,7 @@
             this.cbx_Norm.Location = new System.Drawing.Point(287, 32);
             this.cbx_Norm.Name = "cbx_Norm";
             this.cbx_Norm.Size = new System.Drawing.Size(50, 20);
-            this.cbx_Norm.TabIndex = 20;
+            this.cbx_Norm.TabIndex = 1;
             // 
             // pagerControl1
             // 
@@ -103,14 +103,14 @@
             this.txt_Length.Location = new System.Drawing.Point(682, 30);
             this.txt_Length.Name = "txt_Length";
             this.txt_Length.Size = new System.Drawing.Size(40, 21);
-            this.txt_Length.TabIndex = 17;
+            this.txt_Length.TabIndex = 5;
             // 
             // txt_Model
             // 
             this.txt_Model.Location = new System.Drawing.Point(195, 32);
             this.txt_Model.Name = "txt_Model";
             this.txt_Model.Size = new System.Drawing.Size(40, 21);
-            this.txt_Model.TabIndex = 19;
+            this.txt_Model.TabIndex = 0;
             // 
             // label7
             // 
@@ -139,7 +139,7 @@
             this.cbx_Machine.Location = new System.Drawing.Point(387, 32);
             this.cbx_Machine.Name = "cbx_Machine";
             this.cbx_Machine.Size = new System.Drawing.Size(45, 20);
-            this.cbx_Machine.TabIndex = 15;
+            this.cbx_Machine.TabIndex = 2;
             // 
             // label6
             // 
@@ -242,103 +242,6 @@
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.pagerControl1);
-            this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Location = new System.Drawing.Point(3, 87);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1066, 426);
-            this.panel1.TabIndex = 13;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(545, 35);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 12);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "件数：";
-            // 
-            // btn_Add
-            // 
-            this.btn_Add.Location = new System.Drawing.Point(972, 27);
-            this.btn_Add.Name = "btn_Add";
-            this.btn_Add.Size = new System.Drawing.Size(75, 23);
-            this.btn_Add.TabIndex = 8;
-            this.btn_Add.Text = "入  仓";
-            this.btn_Add.UseVisualStyleBackColor = true;
-            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
-            // 
-            // cbx_Cnt
-            // 
-            this.cbx_Cnt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbx_Cnt.FormattingEnabled = true;
-            this.cbx_Cnt.Location = new System.Drawing.Point(585, 31);
-            this.cbx_Cnt.Name = "cbx_Cnt";
-            this.cbx_Cnt.Size = new System.Drawing.Size(45, 20);
-            this.cbx_Cnt.TabIndex = 11;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.cbx_Norm);
-            this.groupBox1.Controls.Add(this.txt_Model);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.txt_Length);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.cbx_Machine);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.dtp_InTime);
-            this.groupBox1.Controls.Add(this.cbx_Cnt);
-            this.groupBox1.Controls.Add(this.cbx_Big);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txt_Operator);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.btn_Add);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(3, 7);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1066, 74);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "入仓信息";
-            // 
-            // cbx_Big
-            // 
-            this.cbx_Big.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbx_Big.FormattingEnabled = true;
-            this.cbx_Big.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9"});
-            this.cbx_Big.Location = new System.Drawing.Point(483, 31);
-            this.cbx_Big.Name = "cbx_Big";
-            this.cbx_Big.Size = new System.Drawing.Size(45, 20);
-            this.cbx_Big.TabIndex = 10;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(443, 35);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 12);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "大卷：";
-            // 
             // cInTime
             // 
             this.cInTime.DataPropertyName = "InTime";
@@ -421,6 +324,103 @@
             this.cDel.Name = "cDel";
             this.cDel.VisitedLinkColor = System.Drawing.Color.Blue;
             this.cDel.Width = 60;
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.pagerControl1);
+            this.panel1.Controls.Add(this.dataGridView1);
+            this.panel1.Location = new System.Drawing.Point(3, 87);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1066, 426);
+            this.panel1.TabIndex = 13;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(545, 35);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 12);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "件数：";
+            // 
+            // btn_Add
+            // 
+            this.btn_Add.Location = new System.Drawing.Point(972, 27);
+            this.btn_Add.Name = "btn_Add";
+            this.btn_Add.Size = new System.Drawing.Size(75, 23);
+            this.btn_Add.TabIndex = 6;
+            this.btn_Add.Text = "入  仓";
+            this.btn_Add.UseVisualStyleBackColor = true;
+            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
+            // 
+            // cbx_Cnt
+            // 
+            this.cbx_Cnt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbx_Cnt.FormattingEnabled = true;
+            this.cbx_Cnt.Location = new System.Drawing.Point(585, 31);
+            this.cbx_Cnt.Name = "cbx_Cnt";
+            this.cbx_Cnt.Size = new System.Drawing.Size(45, 20);
+            this.cbx_Cnt.TabIndex = 4;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.cbx_Norm);
+            this.groupBox1.Controls.Add(this.txt_Model);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.txt_Length);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.cbx_Machine);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.dtp_InTime);
+            this.groupBox1.Controls.Add(this.cbx_Cnt);
+            this.groupBox1.Controls.Add(this.cbx_Big);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.txt_Operator);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.btn_Add);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Location = new System.Drawing.Point(3, 7);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1066, 74);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "入仓信息";
+            // 
+            // cbx_Big
+            // 
+            this.cbx_Big.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbx_Big.FormattingEnabled = true;
+            this.cbx_Big.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"});
+            this.cbx_Big.Location = new System.Drawing.Point(483, 31);
+            this.cbx_Big.Name = "cbx_Big";
+            this.cbx_Big.Size = new System.Drawing.Size(45, 20);
+            this.cbx_Big.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(443, 35);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 12);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "大卷：";
             // 
             // frmGoodsIn
             // 

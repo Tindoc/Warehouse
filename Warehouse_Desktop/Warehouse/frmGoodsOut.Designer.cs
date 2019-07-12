@@ -94,7 +94,7 @@
             this.cbx_Agent.Location = new System.Drawing.Point(289, 41);
             this.cbx_Agent.Name = "cbx_Agent";
             this.cbx_Agent.Size = new System.Drawing.Size(369, 20);
-            this.cbx_Agent.TabIndex = 3;
+            this.cbx_Agent.TabIndex = 1;
             this.cbx_Agent.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // btn_GenNo
@@ -103,7 +103,7 @@
             this.btn_GenNo.Location = new System.Drawing.Point(551, 407);
             this.btn_GenNo.Name = "btn_GenNo";
             this.btn_GenNo.Size = new System.Drawing.Size(132, 40);
-            this.btn_GenNo.TabIndex = 8;
+            this.btn_GenNo.TabIndex = 0;
             this.btn_GenNo.Text = "生成供货单";
             this.btn_GenNo.UseVisualStyleBackColor = true;
             this.btn_GenNo.Click += new System.EventHandler(this.button1_Click);
@@ -142,7 +142,7 @@
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(885, 73);
-            this.panel1.TabIndex = 15;
+            this.panel1.TabIndex = 0;
             // 
             // label1
             // 
@@ -159,7 +159,7 @@
             this.cbx_Level.Location = new System.Drawing.Point(290, 10);
             this.cbx_Level.Name = "cbx_Level";
             this.cbx_Level.Size = new System.Drawing.Size(70, 20);
-            this.cbx_Level.TabIndex = 21;
+            this.cbx_Level.TabIndex = 0;
             this.cbx_Level.SelectedIndexChanged += new System.EventHandler(this.cbx_Level_SelectedIndexChanged);
             // 
             // label4
@@ -234,7 +234,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 91);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(885, 457);
-            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "扫描成品信息";
             // 
@@ -243,7 +243,7 @@
             this.link_Upload.Location = new System.Drawing.Point(224, 23);
             this.link_Upload.Name = "link_Upload";
             this.link_Upload.Size = new System.Drawing.Size(51, 23);
-            this.link_Upload.TabIndex = 20;
+            this.link_Upload.TabIndex = 2;
             this.link_Upload.Text = "上传";
             this.link_Upload.UseVisualStyleBackColor = true;
             this.link_Upload.Click += new System.EventHandler(this.link_Upload_Click);
@@ -255,7 +255,7 @@
             this.panel_Time.Location = new System.Drawing.Point(409, 14);
             this.panel_Time.Name = "panel_Time";
             this.panel_Time.Size = new System.Drawing.Size(367, 35);
-            this.panel_Time.TabIndex = 19;
+            this.panel_Time.TabIndex = 4;
             // 
             // lab_Error
             // 
@@ -263,7 +263,7 @@
             this.lab_Error.Location = new System.Drawing.Point(148, 12);
             this.lab_Error.Name = "lab_Error";
             this.lab_Error.Size = new System.Drawing.Size(0, 12);
-            this.lab_Error.TabIndex = 20;
+            this.lab_Error.TabIndex = 1;
             // 
             // txt_Barcode
             // 
@@ -271,7 +271,7 @@
             this.txt_Barcode.MaxLength = 15;
             this.txt_Barcode.Name = "txt_Barcode";
             this.txt_Barcode.Size = new System.Drawing.Size(138, 21);
-            this.txt_Barcode.TabIndex = 18;
+            this.txt_Barcode.TabIndex = 0;
             this.txt_Barcode.TextChanged += new System.EventHandler(this.txt_Barcode_TextChanged);
             this.txt_Barcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Barcode_KeyDown);
             // 
@@ -281,7 +281,7 @@
             this.rb_Batch.Location = new System.Drawing.Point(149, 27);
             this.rb_Batch.Name = "rb_Batch";
             this.rb_Batch.Size = new System.Drawing.Size(71, 16);
-            this.rb_Batch.TabIndex = 18;
+            this.rb_Batch.TabIndex = 1;
             this.rb_Batch.Text = "批量上传";
             this.rb_Batch.UseVisualStyleBackColor = true;
             this.rb_Batch.CheckedChanged += new System.EventHandler(this.rb_Batch_CheckedChanged);
@@ -293,7 +293,7 @@
             this.rb_Time.Location = new System.Drawing.Point(333, 26);
             this.rb_Time.Name = "rb_Time";
             this.rb_Time.Size = new System.Drawing.Size(71, 16);
-            this.rb_Time.TabIndex = 17;
+            this.rb_Time.TabIndex = 3;
             this.rb_Time.TabStop = true;
             this.rb_Time.Text = "即时扫描";
             this.rb_Time.UseVisualStyleBackColor = true;
@@ -332,7 +332,7 @@
             this.lab_Sum.Location = new System.Drawing.Point(302, 411);
             this.lab_Sum.Name = "lab_Sum";
             this.lab_Sum.Size = new System.Drawing.Size(72, 27);
-            this.lab_Sum.TabIndex = 13;
+            this.lab_Sum.TabIndex = 7;
             this.lab_Sum.Text = "0.00";
             // 
             // label7

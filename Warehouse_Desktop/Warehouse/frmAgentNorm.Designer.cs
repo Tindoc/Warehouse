@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -46,8 +46,8 @@
             this.cID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cDel = new System.Windows.Forms.DataGridViewLinkColumn();
             this.cModity = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.cDel = new System.Windows.Forms.DataGridViewLinkColumn();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -75,7 +75,7 @@
             this.groupBox1.Location = new System.Drawing.Point(10, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(753, 77);
-            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "详细信息";
             // 
@@ -84,7 +84,7 @@
             this.txt_Price.Location = new System.Drawing.Point(298, 33);
             this.txt_Price.Name = "txt_Price";
             this.txt_Price.Size = new System.Drawing.Size(68, 21);
-            this.txt_Price.TabIndex = 14;
+            this.txt_Price.TabIndex = 1;
             // 
             // label2
             // 
@@ -100,7 +100,7 @@
             this.btn_Add.Location = new System.Drawing.Point(484, 33);
             this.btn_Add.Name = "btn_Add";
             this.btn_Add.Size = new System.Drawing.Size(59, 23);
-            this.btn_Add.TabIndex = 12;
+            this.btn_Add.TabIndex = 2;
             this.btn_Add.Text = "增加";
             this.btn_Add.UseVisualStyleBackColor = true;
             this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
@@ -110,7 +110,7 @@
             this.txt_Name.Location = new System.Drawing.Point(107, 32);
             this.txt_Name.Name = "txt_Name";
             this.txt_Name.Size = new System.Drawing.Size(93, 21);
-            this.txt_Name.TabIndex = 7;
+            this.txt_Name.TabIndex = 0;
             // 
             // label1
             // 
@@ -120,32 +120,6 @@
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "级别名称：";
-            // 
-            // cDel
-            // 
-            this.cDel.ActiveLinkColor = System.Drawing.Color.Blue;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.cDel.DefaultCellStyle = dataGridViewCellStyle1;
-            this.cDel.Frozen = true;
-            this.cDel.HeaderText = "";
-            this.cDel.MinimumWidth = 60;
-            this.cDel.Name = "cDel";
-            this.cDel.ReadOnly = true;
-            this.cDel.VisitedLinkColor = System.Drawing.Color.Blue;
-            this.cDel.Width = 60;
-            // 
-            // cModity
-            // 
-            this.cModity.ActiveLinkColor = System.Drawing.Color.Blue;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.cModity.DefaultCellStyle = dataGridViewCellStyle2;
-            this.cModity.Frozen = true;
-            this.cModity.HeaderText = "";
-            this.cModity.MinimumWidth = 60;
-            this.cModity.Name = "cModity";
-            this.cModity.ReadOnly = true;
-            this.cModity.VisitedLinkColor = System.Drawing.Color.Blue;
-            this.cModity.Width = 60;
             // 
             // panel1
             // 
@@ -158,36 +132,6 @@
             this.panel1.Size = new System.Drawing.Size(753, 350);
             this.panel1.TabIndex = 15;
             // 
-            // cID
-            // 
-            this.cID.DataPropertyName = "LevelID";
-            this.cID.Frozen = true;
-            this.cID.HeaderText = "级别编号";
-            this.cID.Name = "cID";
-            this.cID.ReadOnly = true;
-            this.cID.Visible = false;
-            this.cID.Width = 200;
-            // 
-            // cName
-            // 
-            this.cName.DataPropertyName = "LevelName";
-            this.cName.Frozen = true;
-            this.cName.HeaderText = "级别名称";
-            this.cName.Name = "cName";
-            this.cName.ReadOnly = true;
-            this.cName.Width = 200;
-            // 
-            // cPrice
-            // 
-            this.cPrice.DataPropertyName = "Price";
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.cPrice.DefaultCellStyle = dataGridViewCellStyle4;
-            this.cPrice.Frozen = true;
-            this.cPrice.HeaderText = "每平米价格";
-            this.cPrice.Name = "cPrice";
-            this.cPrice.ReadOnly = true;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -195,14 +139,14 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cID,
@@ -236,6 +180,62 @@
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
+            // 
+            // cID
+            // 
+            this.cID.DataPropertyName = "LevelID";
+            this.cID.Frozen = true;
+            this.cID.HeaderText = "级别编号";
+            this.cID.Name = "cID";
+            this.cID.ReadOnly = true;
+            this.cID.Visible = false;
+            this.cID.Width = 200;
+            // 
+            // cName
+            // 
+            this.cName.DataPropertyName = "LevelName";
+            this.cName.Frozen = true;
+            this.cName.HeaderText = "级别名称";
+            this.cName.Name = "cName";
+            this.cName.ReadOnly = true;
+            this.cName.Width = 200;
+            // 
+            // cPrice
+            // 
+            this.cPrice.DataPropertyName = "Price";
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.cPrice.DefaultCellStyle = dataGridViewCellStyle2;
+            this.cPrice.Frozen = true;
+            this.cPrice.HeaderText = "每平米价格";
+            this.cPrice.Name = "cPrice";
+            this.cPrice.ReadOnly = true;
+            // 
+            // cModity
+            // 
+            this.cModity.ActiveLinkColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.cModity.DefaultCellStyle = dataGridViewCellStyle3;
+            this.cModity.Frozen = true;
+            this.cModity.HeaderText = "";
+            this.cModity.MinimumWidth = 60;
+            this.cModity.Name = "cModity";
+            this.cModity.ReadOnly = true;
+            this.cModity.VisitedLinkColor = System.Drawing.Color.Blue;
+            this.cModity.Width = 60;
+            // 
+            // cDel
+            // 
+            this.cDel.ActiveLinkColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.cDel.DefaultCellStyle = dataGridViewCellStyle4;
+            this.cDel.Frozen = true;
+            this.cDel.HeaderText = "";
+            this.cDel.MinimumWidth = 60;
+            this.cDel.Name = "cDel";
+            this.cDel.ReadOnly = true;
+            this.cDel.VisitedLinkColor = System.Drawing.Color.Blue;
+            this.cDel.Width = 60;
             // 
             // frmAgentNorm
             // 

@@ -49,7 +49,7 @@
             this.btn_GoodsName.Location = new System.Drawing.Point(387, 282);
             this.btn_GoodsName.Name = "btn_GoodsName";
             this.btn_GoodsName.Size = new System.Drawing.Size(52, 23);
-            this.btn_GoodsName.TabIndex = 11;
+            this.btn_GoodsName.TabIndex = 7;
             this.btn_GoodsName.Text = "设定";
             this.btn_GoodsName.UseVisualStyleBackColor = true;
             this.btn_GoodsName.Click += new System.EventHandler(this.btn_GoodsName_Click);
@@ -59,7 +59,7 @@
             this.txt_GoodsName.Location = new System.Drawing.Point(107, 284);
             this.txt_GoodsName.Name = "txt_GoodsName";
             this.txt_GoodsName.Size = new System.Drawing.Size(265, 21);
-            this.txt_GoodsName.TabIndex = 10;
+            this.txt_GoodsName.TabIndex = 6;
             // 
             // label4
             // 
@@ -75,7 +75,7 @@
             this.btn_Address.Location = new System.Drawing.Point(387, 209);
             this.btn_Address.Name = "btn_Address";
             this.btn_Address.Size = new System.Drawing.Size(52, 23);
-            this.btn_Address.TabIndex = 8;
+            this.btn_Address.TabIndex = 5;
             this.btn_Address.Text = "设定";
             this.btn_Address.UseVisualStyleBackColor = true;
             this.btn_Address.Click += new System.EventHandler(this.btn_Address_Click);
@@ -85,7 +85,7 @@
             this.btn_Phone.Location = new System.Drawing.Point(387, 128);
             this.btn_Phone.Name = "btn_Phone";
             this.btn_Phone.Size = new System.Drawing.Size(52, 23);
-            this.btn_Phone.TabIndex = 7;
+            this.btn_Phone.TabIndex = 3;
             this.btn_Phone.Text = "设定";
             this.btn_Phone.UseVisualStyleBackColor = true;
             this.btn_Phone.Click += new System.EventHandler(this.btn_Phone_Click);
@@ -119,7 +119,7 @@
             this.groupBox1.Location = new System.Drawing.Point(3, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(630, 398);
-            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "公司信息设置（打印送货单时显示）";
             // 
@@ -128,7 +128,7 @@
             this.btn_Name.Location = new System.Drawing.Point(387, 45);
             this.btn_Name.Name = "btn_Name";
             this.btn_Name.Size = new System.Drawing.Size(52, 23);
-            this.btn_Name.TabIndex = 6;
+            this.btn_Name.TabIndex = 1;
             this.btn_Name.Text = "设定";
             this.btn_Name.UseVisualStyleBackColor = true;
             this.btn_Name.Click += new System.EventHandler(this.btn_Name_Click);
@@ -138,21 +138,21 @@
             this.textBox1.Location = new System.Drawing.Point(107, 46);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(265, 21);
-            this.textBox1.TabIndex = 3;
+            this.textBox1.TabIndex = 0;
             // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(107, 211);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(265, 21);
-            this.textBox3.TabIndex = 5;
+            this.textBox3.TabIndex = 4;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(107, 130);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(265, 21);
-            this.textBox2.TabIndex = 4;
+            this.textBox2.TabIndex = 2;
             // 
             // label2
             // 

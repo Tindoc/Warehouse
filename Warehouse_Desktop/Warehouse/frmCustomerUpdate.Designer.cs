@@ -53,7 +53,7 @@
             this.txt_Fox.Location = new System.Drawing.Point(80, 204);
             this.txt_Fox.Name = "txt_Fox";
             this.txt_Fox.Size = new System.Drawing.Size(94, 21);
-            this.txt_Fox.TabIndex = 20;
+            this.txt_Fox.TabIndex = 4;
             // 
             // groupBox1
             // 
@@ -76,7 +76,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 19);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(332, 288);
-            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // label7
@@ -93,7 +93,7 @@
             this.txt_Tel.Location = new System.Drawing.Point(80, 171);
             this.txt_Tel.Name = "txt_Tel";
             this.txt_Tel.Size = new System.Drawing.Size(94, 21);
-            this.txt_Tel.TabIndex = 18;
+            this.txt_Tel.TabIndex = 3;
             // 
             // label6
             // 
@@ -109,14 +109,14 @@
             this.txt_Address.Location = new System.Drawing.Point(80, 236);
             this.txt_Address.Name = "txt_Address";
             this.txt_Address.Size = new System.Drawing.Size(232, 21);
-            this.txt_Address.TabIndex = 14;
+            this.txt_Address.TabIndex = 5;
             // 
             // txt_Contact
             // 
             this.txt_Contact.Location = new System.Drawing.Point(80, 104);
             this.txt_Contact.Name = "txt_Contact";
             this.txt_Contact.Size = new System.Drawing.Size(94, 21);
-            this.txt_Contact.TabIndex = 13;
+            this.txt_Contact.TabIndex = 1;
             // 
             // cbx_Level
             // 
@@ -128,14 +128,14 @@
             this.cbx_Level.Location = new System.Drawing.Point(80, 64);
             this.cbx_Level.Name = "cbx_Level";
             this.cbx_Level.Size = new System.Drawing.Size(94, 20);
-            this.cbx_Level.TabIndex = 12;
+            this.cbx_Level.TabIndex = 0;
             // 
             // txt_Phone
             // 
             this.txt_Phone.Location = new System.Drawing.Point(80, 136);
             this.txt_Phone.Name = "txt_Phone";
             this.txt_Phone.Size = new System.Drawing.Size(94, 21);
-            this.txt_Phone.TabIndex = 11;
+            this.txt_Phone.TabIndex = 2;
             // 
             // txt_Name
             // 
@@ -195,7 +195,7 @@
             this.btn_Close.Location = new System.Drawing.Point(189, 324);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(59, 23);
-            this.btn_Close.TabIndex = 19;
+            this.btn_Close.TabIndex = 2;
             this.btn_Close.Text = "关闭";
             this.btn_Close.UseVisualStyleBackColor = true;
             this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
@@ -205,7 +205,7 @@
             this.btn_Mod.Location = new System.Drawing.Point(106, 324);
             this.btn_Mod.Name = "btn_Mod";
             this.btn_Mod.Size = new System.Drawing.Size(59, 23);
-            this.btn_Mod.TabIndex = 18;
+            this.btn_Mod.TabIndex = 1;
             this.btn_Mod.Text = "修改";
             this.btn_Mod.UseVisualStyleBackColor = true;
             this.btn_Mod.Click += new System.EventHandler(this.btn_Mod_Click);

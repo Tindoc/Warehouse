@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btn_Search = new System.Windows.Forms.Button();
             this.btn_Add = new System.Windows.Forms.Button();
@@ -70,7 +70,7 @@
             this.btn_Search.Location = new System.Drawing.Point(500, 35);
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(59, 23);
-            this.btn_Search.TabIndex = 11;
+            this.btn_Search.TabIndex = 3;
             this.btn_Search.Text = "查询";
             this.btn_Search.UseVisualStyleBackColor = true;
             this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
@@ -80,7 +80,7 @@
             this.btn_Add.Location = new System.Drawing.Point(426, 35);
             this.btn_Add.Name = "btn_Add";
             this.btn_Add.Size = new System.Drawing.Size(59, 23);
-            this.btn_Add.TabIndex = 10;
+            this.btn_Add.TabIndex = 2;
             this.btn_Add.Text = "增加";
             this.btn_Add.UseVisualStyleBackColor = true;
             this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
@@ -94,14 +94,14 @@
             this.cbx_Position.Location = new System.Drawing.Point(288, 34);
             this.cbx_Position.Name = "cbx_Position";
             this.cbx_Position.Size = new System.Drawing.Size(107, 20);
-            this.cbx_Position.TabIndex = 8;
+            this.cbx_Position.TabIndex = 1;
             // 
             // txt_Name
             // 
             this.txt_Name.Location = new System.Drawing.Point(91, 34);
             this.txt_Name.Name = "txt_Name";
             this.txt_Name.Size = new System.Drawing.Size(104, 21);
-            this.txt_Name.TabIndex = 7;
+            this.txt_Name.TabIndex = 0;
             // 
             // label1
             // 
@@ -124,8 +124,8 @@
             // cModity
             // 
             this.cModity.ActiveLinkColor = System.Drawing.Color.Blue;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.cModity.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.cModity.DefaultCellStyle = dataGridViewCellStyle1;
             this.cModity.Frozen = true;
             this.cModity.HeaderText = "";
             this.cModity.MinimumWidth = 60;
@@ -137,8 +137,8 @@
             // cDel
             // 
             this.cDel.ActiveLinkColor = System.Drawing.Color.Blue;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.cDel.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.cDel.DefaultCellStyle = dataGridViewCellStyle2;
             this.cDel.Frozen = true;
             this.cDel.HeaderText = "";
             this.cDel.MinimumWidth = 60;
@@ -207,7 +207,6 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.Name = "frmUser";
-            this.Text = "frmUser";
             this.Load += new System.EventHandler(this.frmUser_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
