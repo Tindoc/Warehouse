@@ -100,7 +100,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "frmUpdatePwd";
-            this.Text = "frmUpdatePwd";
+            this.Text = "修改个人密码";
             this.ResumeLayout(false);
             this.PerformLayout();
 

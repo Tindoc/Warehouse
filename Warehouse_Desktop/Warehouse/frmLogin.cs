@@ -90,5 +90,11 @@ namespace Warehouse
                 MessageBox.Show("登录失败，请检查服务器是否正常运行！");
             }
         }
+
+        private void txt_UserPwd_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                btn_Login_Click(null, null);
+        }
     }
 }

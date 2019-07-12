@@ -64,5 +64,11 @@ namespace Warehouse
         {
             Application.Exit();
         }
+
+        private void txt_UserPwd_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                btn_Login_Click(null, null);
+        }
     }
 }

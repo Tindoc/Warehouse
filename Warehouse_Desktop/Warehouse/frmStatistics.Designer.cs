@@ -229,7 +229,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "frmStatistics";
-            this.Text = "frmStatistics";
+            this.Text = "统计查询";
             this.Load += new System.EventHandler(this.frmStatistics_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

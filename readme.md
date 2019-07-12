@@ -52,6 +52,8 @@
 
 ## 项目使用
 
+下载或者 clone 本项目的 Tag：version 1.0 版本（没有延续原项目的版本号）
+
 根据文件 [DatabaseSetting/readme.md](./DatabaseSetting/readme.md) 的提示配置数据库环境
 
 在 Warehouse 项目的配置文件中添加数据库连接字符串即可使用

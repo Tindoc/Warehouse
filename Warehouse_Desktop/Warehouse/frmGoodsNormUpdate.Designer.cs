@@ -91,7 +91,7 @@
             this.Controls.Add(this.txt_Name);
             this.Controls.Add(this.label1);
             this.Name = "frmGoodsNormUpdate";
-            this.Text = "frmGoodsNormUpdate";
+            this.Text = "修改";
             this.Load += new System.EventHandler(this.frmGoodsNormUpdate_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -162,7 +162,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Name = "frmWarehouseView";
-            this.Text = "frmWarehouseView";
+            this.Text = "当前库存信息";
             this.Load += new System.EventHandler(this.frmWarehouseView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

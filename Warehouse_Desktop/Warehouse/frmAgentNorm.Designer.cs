@@ -245,7 +245,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.Name = "frmAgentNorm";
-            this.Text = "frmAgentNorm";
+            this.Text = "代理商级别维护";
             this.Load += new System.EventHandler(this.frmAgentNorm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

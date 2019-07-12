@@ -203,7 +203,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.Name = "frmGoodsNorm";
-            this.Text = "frmGoodsNorm";
+            this.Text = "成品规格维护";
             this.Load += new System.EventHandler(this.frmGoodsNorm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

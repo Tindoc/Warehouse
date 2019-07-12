@@ -64,6 +64,7 @@
             this.txt_UserPwd.Size = new System.Drawing.Size(131, 21);
             this.txt_UserPwd.TabIndex = 1;
             this.txt_UserPwd.UseSystemPasswordChar = true;
+            this.txt_UserPwd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_UserPwd_KeyDown);
             // 
             // panel1
             // 
@@ -124,7 +125,7 @@
             this.Controls.Add(this.lab_Version);
             this.Controls.Add(this.btn_Cancel);
             this.Name = "frmLogin";
-            this.Text = "Login";
+            this.Text = "登录";
             this.Load += new System.EventHandler(this.frmLogin_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

@@ -207,6 +207,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.Name = "frmUser";
+            this.Text = "用户管理";
             this.Load += new System.EventHandler(this.frmUser_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

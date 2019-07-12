@@ -140,7 +140,7 @@
             this.Controls.Add(this.lab_Batch);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Name = "frmInDetail";
-            this.Text = "frmInDetail";
+            this.Text = "条形码打印";
             this.Load += new System.EventHandler(this.frmInDetail_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

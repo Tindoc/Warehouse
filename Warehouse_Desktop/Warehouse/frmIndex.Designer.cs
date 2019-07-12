@@ -95,7 +95,7 @@
             // 
             this.成品出仓ToolStripMenuItem.Name = "成品出仓ToolStripMenuItem";
             this.成品出仓ToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.成品出仓ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.成品出仓ToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.成品出仓ToolStripMenuItem.Text = "成品出仓";
             this.成品出仓ToolStripMenuItem.Click += new System.EventHandler(this.成品出仓ToolStripMenuItem_Click);
             // 
@@ -103,7 +103,7 @@
             // 
             this.查询ToolStripMenuItem1.Name = "查询ToolStripMenuItem1";
             this.查询ToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.查询ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.查询ToolStripMenuItem1.Size = new System.Drawing.Size(145, 22);
             this.查询ToolStripMenuItem1.Text = "出仓查询";
             this.查询ToolStripMenuItem1.Click += new System.EventHandler(this.查询ToolStripMenuItem1_Click);
             // 
@@ -111,7 +111,7 @@
             // 
             this.库存查看ToolStripMenuItem.Name = "库存查看ToolStripMenuItem";
             this.库存查看ToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F4;
-            this.库存查看ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.库存查看ToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.库存查看ToolStripMenuItem.Text = "库存查看";
             this.库存查看ToolStripMenuItem.Click += new System.EventHandler(this.库存查看ToolStripMenuItem_Click);
             // 
@@ -127,7 +127,7 @@
             // 
             this.客户管理ToolStripMenuItem1.Name = "客户管理ToolStripMenuItem1";
             this.客户管理ToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.客户管理ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.客户管理ToolStripMenuItem1.Size = new System.Drawing.Size(145, 22);
             this.客户管理ToolStripMenuItem1.Text = "客户管理";
             this.客户管理ToolStripMenuItem1.Click += new System.EventHandler(this.客户管理ToolStripMenuItem1_Click);
             // 
@@ -230,7 +230,7 @@
             this.Controls.Add(this.panel1);
             this.IsMdiContainer = true;
             this.Name = "frmIndex";
-            this.Text = "frmIndex";
+            this.Text = "条形码库存管理系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmIndex_FormClosed);
             this.Load += new System.EventHandler(this.frmIndex_Load);

@@ -430,7 +430,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmGoodsOut";
-            this.Text = "frmGoodsOut";
+            this.Text = "成品出仓";
             this.Load += new System.EventHandler(this.frmGoodsOut_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

@@ -339,7 +339,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.Name = "frmGoodsSearch";
-            this.Text = "frmGoodsSearch";
+            this.Text = "出仓查询";
             this.Load += new System.EventHandler(this.frmGoodsSearch_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

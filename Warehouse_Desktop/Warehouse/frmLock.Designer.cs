@@ -44,7 +44,8 @@
             this.btn_Cancel.Location = new System.Drawing.Point(167, 184);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
-            this.btn_Cancel.TabIndex = 2;
+            this.btn_Cancel.TabIndex = 1;
+            this.btn_Cancel.Tag = "2";
             this.btn_Cancel.Text = "退  出";
             this.btn_Cancel.UseVisualStyleBackColor = true;
             this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
@@ -56,6 +57,7 @@
             this.txt_UserName.ReadOnly = true;
             this.txt_UserName.Size = new System.Drawing.Size(131, 21);
             this.txt_UserName.TabIndex = 1;
+            this.txt_UserName.Tag = "999";
             // 
             // txt_UserPwd
             // 
@@ -63,7 +65,9 @@
             this.txt_UserPwd.Name = "txt_UserPwd";
             this.txt_UserPwd.Size = new System.Drawing.Size(131, 21);
             this.txt_UserPwd.TabIndex = 0;
+            this.txt_UserPwd.Tag = "0";
             this.txt_UserPwd.UseSystemPasswordChar = true;
+            this.txt_UserPwd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_UserPwd_KeyDown);
             // 
             // panel1
             // 
@@ -100,7 +104,8 @@
             this.btn_Login.Location = new System.Drawing.Point(75, 184);
             this.btn_Login.Name = "btn_Login";
             this.btn_Login.Size = new System.Drawing.Size(75, 23);
-            this.btn_Login.TabIndex = 1;
+            this.btn_Login.TabIndex = 0;
+            this.btn_Login.Tag = "1";
             this.btn_Login.Text = "解  锁";
             this.btn_Login.UseVisualStyleBackColor = true;
             this.btn_Login.Click += new System.EventHandler(this.btn_Login_Click);
@@ -114,7 +119,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btn_Login);
             this.Name = "frmLock";
-            this.Text = "frmLock";
+            this.Text = "锁定";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLock_FormClosing);
             this.Load += new System.EventHandler(this.frmLock_Load);
             this.panel1.ResumeLayout(false);

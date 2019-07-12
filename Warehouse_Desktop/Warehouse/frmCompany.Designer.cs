@@ -179,7 +179,7 @@
             this.ClientSize = new System.Drawing.Size(636, 422);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmCompany";
-            this.Text = "frmCompany";
+            this.Text = "公司信息设置";
             this.Load += new System.EventHandler(this.frmCompany_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

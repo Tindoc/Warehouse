@@ -430,7 +430,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmGoodsIn";
-            this.Text = "frmGoodsIn";
+            this.Text = "成品入仓";
             this.Load += new System.EventHandler(this.frmGoodsIn_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
