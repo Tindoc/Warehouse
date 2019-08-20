@@ -45,7 +45,7 @@ namespace Warehouse
                 dtp_InTime.Enabled = true;  // “admin”用户可选择入仓时间
             }
 
-            // pageControl1 不是默认控件，需要引用 WinFormPager.dll 在工具箱鼠标右键“选择项-浏览-找到DLL”，再拖放到窗体即可
+            // pagerControl1 不是默认控件，需要引用 WinFormPager.dll 在工具箱鼠标右键“选择项-浏览-找到DLL”，再拖放到窗体即可
             pagerControl1.OnPageChanged += new EventHandler(pagerControl1_OnPageChanged);   // 为控件添加事件处理函数
             BindDGV();  // 自定义函数
         }
