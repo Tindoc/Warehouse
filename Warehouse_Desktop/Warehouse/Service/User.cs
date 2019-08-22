@@ -5,6 +5,8 @@ using System.Data;
 using System.Data.SqlClient;
 using SqlServerDAL; // 项目 SqlServer 的 DbHelperSQL 类
 
+using System.Data.OleDb;
+
 namespace Warehouse
 {
     public partial class User
@@ -49,12 +51,12 @@ namespace Warehouse
 		public User(int UserID)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select UserID,UserName,UserPwd,Position ");
+			strSql.Append("select UserID,UserName,UserPwd,[Position] ");    // position 为 Access 保留字，加 []
 			strSql.Append(" FROM [User] ");
 			strSql.Append(" where UserName=@UserName and UserID=@UserID ");
-			SqlParameter[] parameters = {
-					new SqlParameter("@UserName", UserName),
-					new SqlParameter("@UserID", UserID)};
+			OleDbParameter[] parameters = {
+					new OleDbParameter("@UserName", UserName),
+					new OleDbParameter("@UserID", UserID)};
 
 			DataSet ds=DbHelperSQL.Query(strSql.ToString(),parameters);
 			if(ds.Tables[0].Rows.Count>0)
@@ -87,8 +89,8 @@ namespace Warehouse
 			strSql.Append("select count(1) from [User]");
 			strSql.Append(" where UserName=@UserName");
 
-			SqlParameter[] parameters = {
-					new SqlParameter("@UserName", UserName)};
+			OleDbParameter[] parameters = {
+					new OleDbParameter("@UserName", UserName)};
 
 			return DbHelperSQL.Exists(strSql.ToString(),parameters);
 		}
@@ -102,9 +104,9 @@ namespace Warehouse
             strSql.Append("select count(1) from [User]");
             strSql.Append(" where UserName=@UserName AND UserPwd = @userPwd");
 
-            SqlParameter[] parameters = {
-					new SqlParameter("@UserName", UserName),
-                    new SqlParameter("@userPwd", userPwd)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@UserName", UserName),
+                    new OleDbParameter("@userPwd", userPwd)};
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
@@ -117,19 +119,20 @@ namespace Warehouse
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into [User] (");
-			strSql.Append("UserName,UserPwd,Position)");
+			strSql.Append("UserName,UserPwd,[Position])");  // position 是 Access 的保留字，所以需要加 []
 			strSql.Append(" values (");
-			strSql.Append("@UserName,@UserPwd,@Position)");
-			strSql.Append(";select @@IDENTITY");
-			SqlParameter[] parameters = {
-					new SqlParameter("@UserName", SqlDbType.VarChar,50),
-					new SqlParameter("@UserPwd", SqlDbType.VarChar,50),
-					new SqlParameter("@Position", SqlDbType.VarChar,50)};
+			strSql.Append("@UserName,@UserPwd,@Position);");
+			//strSql.Append(";select @@IDENTITY");  // SQL Server 用
+			OleDbParameter[] parameters = {
+					new OleDbParameter("@UserName", OleDbType.VarWChar,50),
+					new OleDbParameter("@UserPwd", OleDbType.VarWChar,50),
+					new OleDbParameter("@Position", OleDbType.VarWChar,50)};
 			parameters[0].Value = UserName;
 			parameters[1].Value = "123456";
 			parameters[2].Value = Position;
 
-			object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
+			//object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters); // SQL Server 用
+            object obj = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
 			if (obj == null)
 			{
 				return 0;
@@ -147,12 +150,12 @@ namespace Warehouse
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update [User] set ");
 			strSql.Append("UserPwd=@UserPwd,");
-			strSql.Append("Position=@Position");
+			strSql.Append("[Position]=@Position");  // position 为 Access 保留字，需要加 []
 			strSql.Append(" where UserName=@UserName");
-			SqlParameter[] parameters = {
-					new SqlParameter("@UserPwd", SqlDbType.VarChar,50),
-					new SqlParameter("@Position", SqlDbType.VarChar,50),
-					new SqlParameter("@UserName", SqlDbType.VarChar,50)};
+			OleDbParameter[] parameters = {
+					new OleDbParameter("@UserPwd", OleDbType.VarChar,50),
+					new OleDbParameter("@Position", OleDbType.VarChar,50),
+					new OleDbParameter("@UserName", OleDbType.VarChar,50)};
 			parameters[0].Value = UserPwd;
 			parameters[1].Value = Position;
 			parameters[2].Value = UserName;
@@ -176,8 +179,8 @@ namespace Warehouse
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("delete from [User] ");
 			strSql.Append(" where UserName=@UserName");
-			SqlParameter[] parameters = {
-					new SqlParameter("@UserName", UserName)};
+			OleDbParameter[] parameters = {
+					new OleDbParameter("@UserName", UserName)};
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -197,11 +200,11 @@ namespace Warehouse
 		public void GetModel(string name)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select UserID,UserName,UserPwd,Position ");
+			strSql.Append("select UserID,UserName,UserPwd,[Position] ");    // position 为 Access 关键字，加 []
 			strSql.Append(" FROM [User] ");
 			strSql.Append(" where UserName=@UserName");
-			SqlParameter[] parameters = {
-					new SqlParameter("@UserName", name)};
+			OleDbParameter[] parameters = {
+					new OleDbParameter("@UserName", name)};
 
 			DataSet ds=DbHelperSQL.Query(strSql.ToString(),parameters);
 			if(ds.Tables[0].Rows.Count>0)

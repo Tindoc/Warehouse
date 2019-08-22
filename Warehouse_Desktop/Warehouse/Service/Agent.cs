@@ -5,6 +5,8 @@ using System.Text;
 using System.Data.SqlClient;
 using SqlServerDAL;
 
+using System.Data.OleDb;
+
 namespace Warehouse
 {
     /// <summary>
@@ -103,10 +105,11 @@ namespace Warehouse
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select A.*,B.Price ");
-            strSql.Append(" FROM [Agent] A JOIN Level B ON A.LevelName = B.LevelName ");
+            //strSql.Append(" FROM [Agent] A JOIN [Level] B ON A.LevelName = B.LevelName ");  // SQL Server 用
+            strSql.Append(" FROM [Agent] AS A INNER JOIN [Level] AS B ON A.LevelName = B.LevelName ");  //
             strSql.Append(" where Name=@Name ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@Name", Name)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@Name", Name)};
 
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
             if (ds.Tables[0].Rows.Count > 0)
@@ -159,8 +162,8 @@ namespace Warehouse
             strSql.Append("select count(1) from [Agent]");
             strSql.Append(" where Name=@Name ");
 
-            SqlParameter[] parameters = {
-					new SqlParameter("@Name", Name)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@Name", Name)};
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
@@ -176,17 +179,18 @@ namespace Warehouse
             strSql.Append("Name,Contact,Phone,Address,LevelName,Tel,Fox)");
             strSql.Append(" values (");
             strSql.Append("@Name,@Contact,@Phone,@Address,@LevelName,@Tel,@Fox)");
-            strSql.Append(";select @@IDENTITY");
-            SqlParameter[] parameters = {
-					new SqlParameter("@Name", Name),
-					new SqlParameter("@Contact", Contact),
-					new SqlParameter("@Phone", Phone),
-					new SqlParameter("@Address", Address),
-                    new SqlParameter("@Tel", Tel),
-                    new SqlParameter("@Fox", Fox),
-					new SqlParameter("@LevelName",LevelName)};
+            //strSql.Append(";select @@IDENTITY");  // SQL Server 用
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@Name", Name),
+					new OleDbParameter("@Contact", Contact),
+					new OleDbParameter("@Phone", Phone),
+					new OleDbParameter("@Address", Address),
+                    new OleDbParameter("@LevelName",LevelName),
+                    new OleDbParameter("@Tel", Tel),
+                    new OleDbParameter("@Fox", Fox)};
 
-            object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
+            //object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);    // SQL Server 用
+            object obj = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);  // Access 用
             if (obj == null)
             {
                 return 0;
@@ -210,14 +214,14 @@ namespace Warehouse
             strSql.Append("Fox=@Fox,");
             strSql.Append("LevelName=@LevelName");
             strSql.Append(" where Name=@Name ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@Contact", Contact),
-					new SqlParameter("@Phone", Phone),
-					new SqlParameter("@Address", Address),
-					new SqlParameter("@LevelName", LevelName),
-					new SqlParameter("@Name", Name),
-                    new SqlParameter("@Tel", Tel),
-                    new SqlParameter("@Fox", Fox)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@Contact", Contact),
+					new OleDbParameter("@Phone", Phone),
+					new OleDbParameter("@Address", Address),
+                    new OleDbParameter("@Tel", Tel),
+                    new OleDbParameter("@Fox", Fox),
+                	new OleDbParameter("@LevelName", LevelName),
+					new OleDbParameter("@Name", Name),};
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -238,8 +242,8 @@ namespace Warehouse
             StringBuilder strSql = new StringBuilder();
             strSql.Append("delete from [Agent] ");
             strSql.Append(" where Name=@Name ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@Name", Name)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@Name", Name)};
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -259,11 +263,13 @@ namespace Warehouse
         public void GetModel(string Name)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select * ");
-            strSql.Append(" FROM [Agent] A JOIN Level B ON A.LevelName = B.LevelName ");
+            //strSql.Append("select * ");   // SQL Server 用
+            //strSql.Append(" FROM [Agent] A JOIN [Level] B ON A.LevelName = B.LevelName ");    // SQL Server 用
+            strSql.Append("select ID, [Name], Contact, Phone, Address, A.LevelName as LevelName, [Price], Tel, Fox");   // Access 用，Access 不能自动合并 on 条件后的字段
+            strSql.Append(" FROM [Agent] AS A INNER JOIN [Level] AS B ON A.LevelName = B.LevelName ");  // Access 用
             strSql.Append(" where Name=@Name ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@Name", Name)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@Name", Name)};
 
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
             if (ds.Tables[0].Rows.Count > 0)
@@ -328,8 +334,10 @@ namespace Warehouse
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select * ");
-            strSql.Append(" FROM [Agent] A JOIN Level L ON A.LevelName=L.LevelName ");
+            //strSql.Append("select * "); // SQL Server 用
+            //strSql.Append(" FROM [Agent] A JOIN [Level] L ON A.LevelName=L.LevelName ");    // SQL Server 用
+            strSql.Append("select ID, [Name], Contact, Phone, Address, A.LevelName as LevelName, [Price], Tel, Fox");   // Access 用，Access 不能自动合并 on 条件后的字段
+            strSql.Append(" FROM [Agent] AS A JOIN [Level] AS L ON A.LevelName=L.LevelName ");    // Access 用
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -366,14 +374,17 @@ namespace Warehouse
             string strSql = "";
             if (PageIndex == 1)
             {
-                strSql += "select TOP " + PageSize + " * FROM [Agent] A JOIN Level L ON A.LevelName=L.LevelName";
+                //strSql += "select TOP " + PageSize + " * FROM [Agent] A JOIN Level L ON A.LevelName=L.LevelName"; // SQL Server 用
+                strSql += "select TOP " + PageSize + " ID, [Name], Contact, Phone, Address, A.LevelName as LevelName, [Price], Tel, Fox FROM [Agent] AS A INNER JOIN [Level] AS L ON A.LevelName=L.LevelName";   // Access 用
             }
             else
             {
                 int sumSize = PageSize * (PageIndex - 1);
-                strSql += "select TOP " + PageSize + " * FROM [Agent] A JOIN Level L ON A.LevelName=L.LevelName WHERE A.Name NOT IN(select TOP " + sumSize + " Name FROM [Agent] ORDER BY ID DESC)";
+                //strSql += "select TOP " + PageSize + " * FROM [Agent] A JOIN Level L ON A.LevelName=L.LevelName WHERE A.Name NOT IN(select TOP " + sumSize + " Name FROM [Agent] ORDER BY ID DESC)";    // SQL Server 用
+                strSql += "select TOP " + PageSize + " ID, [Name], Contact, Phone, Address, A.LevelName as LevelName, [Price], Tel, Fox FROM [Agent] A INNER JOIN [Level] L ON A.LevelName=L.LevelName WHERE A.Name NOT IN(select TOP " + sumSize + " Name FROM [Agent] ORDER BY ID DESC)";    // Access 用
             }
-            string strCnt = "SELECT count(id) FROM Agent A JOIN Level L ON A.LevelName=L.LevelName ";
+            //string strCnt = "SELECT count(id) FROM Agent A JOIN Level L ON A.LevelName=L.LevelName "; // SQL Server 用
+            string strCnt = "SELECT count(id) FROM Agent AS A INNER JOIN [Level] AS L ON A.LevelName=L.LevelName "; // Access 用
             if (strWhere.Trim() != "")
             {
                 strSql += " where " + strWhere;

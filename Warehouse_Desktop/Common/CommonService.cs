@@ -11,6 +11,8 @@ using System.Data.SqlClient;
 using SqlServerDAL;
 using SqlServer;
 
+using System.Data.OleDb;
+
 namespace Common
 {
     public class CommonService
@@ -145,7 +147,8 @@ namespace Common
         /// <returns></returns>
         public static DateTime GetServerTime()
         {
-            string sql = "SELECT GETDATE()";    // 获取服务器时间
+            //string sql = "SELECT GETDATE()";    // 获取服务器时间，SQL Server用
+            string sql = "select date()";    // 获取服务器时间，Access用
             object obj = DbHelperSQL.GetSingle(sql);
             if (obj != DBNull.Value && obj != null)
             {
@@ -164,12 +167,27 @@ namespace Common
         /// <returns></returns>
         public static string GetParamValue(string name)
         {
+            // SQL Server 用
+            //string sql = "SELECT ArgValue FROM Argument WHERE ArgName=@paramname";
+            //SqlParameter[] pas = new SqlParameter[]
+            //{
+            //    new SqlParameter("@paramname", name)
+            //};
+            //object rows = DbHelperSQL.GetSingle(sql, pas);
+            //if (rows != System.DBNull.Value && rows != null)
+            //{
+            //    return rows.ToString();
+            //}
+            //else
+            //{
+            //    return " ";
+            //}
+
+            // Access 用
             string sql = "SELECT ArgValue FROM Argument WHERE ArgName=@paramname";
-            SqlParameter[] pas = new SqlParameter[]
-            {
-                new SqlParameter("@paramname", name)
-            };
-            object rows = SqlHelper.ExecuteScalar(sql, pas);
+            OleDbParameter[] pas = new OleDbParameter[] {
+                new OleDbParameter("@paramname", name)};
+            object rows = DbHelperSQL.GetSingle(sql, pas);
             if (rows != System.DBNull.Value && rows != null)
             {
                 return rows.ToString();
@@ -188,15 +206,26 @@ namespace Common
         /// <returns></returns>
         public static bool SetParamName(string name, string value)
         {
+            // SQL Server 用
+            //string sql = "UPDATE Argument Set ArgValue=@paramvalue WHERE ArgName=@paramname";
+            //SqlParameter[] pas = new SqlParameter[]
+            //{
+            //new SqlParameter("@paramvalue",SqlDbType.Text),
+            //new SqlParameter("@paramname",SqlDbType.VarChar,150)
+            //};
+            //pas[0].Value = value;
+            //pas[1].Value = name;
+            //int rows = DbHelperSQL.ExecuteSql(sql, pas);
+            //return (rows > 0);
+            
+            // Access 用
             string sql = "UPDATE Argument Set ArgValue=@paramvalue WHERE ArgName=@paramname";
-            SqlParameter[] pas = new SqlParameter[]
-            {
-            new SqlParameter("@paramvalue",SqlDbType.Text),
-            new SqlParameter("@paramname",SqlDbType.VarChar,150)
-            };
+            OleDbParameter[] pas = new OleDbParameter[]{
+                new OleDbParameter("@paramvalue",OleDbType.VarChar),
+                new OleDbParameter("@paramname",OleDbType.VarChar,150)};
             pas[0].Value = value;
             pas[1].Value = name;
-            int rows = SqlHelper.ExecuteNonQuery(sql, pas);
+            int rows = DbHelperSQL.ExecuteSql(sql, pas);
             return (rows > 0);
         }
 

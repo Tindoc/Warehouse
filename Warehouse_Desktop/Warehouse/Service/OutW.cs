@@ -3,6 +3,9 @@ using System.Data;
 using System.Text;
 using System.Data.SqlClient;
 using SqlServerDAL;//Please add references
+
+using System.Data.OleDb;
+
 namespace Warehouse
 {
     /// <summary>
@@ -64,8 +67,8 @@ namespace Warehouse
             strSql.Append("select ID,Batch,Agent,Barcode ");
             strSql.Append(" FROM [OutW] ");
             strSql.Append(" where ID=@ID ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@ID", SqlDbType.Int,4)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@ID", OleDbType.Integer, 4)};
             parameters[0].Value = ID;
 
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
@@ -99,8 +102,8 @@ namespace Warehouse
             strSql.Append("select count(1) from [OutW]");
             strSql.Append(" where ID=@ID ");
 
-            SqlParameter[] parameters = {
-					new SqlParameter("@ID", SqlDbType.Int,4)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@ID", OleDbType.Integer, 4)};
             parameters[0].Value = ID;
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
@@ -118,10 +121,10 @@ namespace Warehouse
             strSql.Append(" values (");
             strSql.Append("@Batch,@Agent,@Barcode)");
             strSql.Append(";select @@IDENTITY");
-            SqlParameter[] parameters = {
-					new SqlParameter("@Batch", SqlDbType.VarChar,50),
-					new SqlParameter("@Agent", SqlDbType.VarChar,50),
-					new SqlParameter("@Barcode", SqlDbType.VarChar,100)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@Batch", OleDbType.VarChar,50),
+					new OleDbParameter("@Agent", OleDbType.VarChar,50),
+					new OleDbParameter("@Barcode", OleDbType.VarChar,100)};
             parameters[0].Value = Batch;
             parameters[1].Value = Agent;
             parameters[2].Value = Barcode;
@@ -147,11 +150,11 @@ namespace Warehouse
             strSql.Append("Agent=@Agent,");
             strSql.Append("Barcode=@Barcode");
             strSql.Append(" where ID=@ID ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@Batch", SqlDbType.VarChar,50),
-					new SqlParameter("@Agent", SqlDbType.VarChar,50),
-					new SqlParameter("@Barcode", SqlDbType.VarChar,100),
-					new SqlParameter("@ID", SqlDbType.Int,4)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@Batch", OleDbType.VarChar,50),
+					new OleDbParameter("@Agent", OleDbType.VarChar,50),
+					new OleDbParameter("@Barcode", OleDbType.VarChar,100),
+					new OleDbParameter("@ID", OleDbType.Integer,4)};
             parameters[0].Value = Batch;
             parameters[1].Value = Agent;
             parameters[2].Value = Barcode;
@@ -176,8 +179,8 @@ namespace Warehouse
             StringBuilder strSql = new StringBuilder();
             strSql.Append("delete from [OutW] ");
             strSql.Append(" where ID=@ID ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@ID", SqlDbType.Int,4)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@ID", OleDbType.Integer, 4)};
             parameters[0].Value = ID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
@@ -201,8 +204,8 @@ namespace Warehouse
             strSql.Append("select ID,Batch,Agent,Barcode ");
             strSql.Append(" FROM [OutW] ");
             strSql.Append(" where ID=@ID ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@ID", SqlDbType.Int,4)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@ID", OleDbType.Integer, 4)};
             parameters[0].Value = ID;
 
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);

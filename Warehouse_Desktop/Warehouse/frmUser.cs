@@ -69,7 +69,7 @@ namespace Warehouse
             string sql = "";
             if (_position != "不限")
             {
-                sql += " Position = '" + _position + "' AND";
+                sql += " [Position] = '" + _position + "' AND";
             }
             if (_name != string.Empty)
             {

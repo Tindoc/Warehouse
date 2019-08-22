@@ -51,11 +51,18 @@ namespace Warehouse
         /// <param name="end"></param>
         private void BindDGV(string start, string end)
         {
+            /*
             string sql = "SELECT Model,NormName," +
                " (SELECT ISNULL(SUM(I.Cnt),0) FROM InWDetail I WHERE Model=N.Model AND NormName=N.NormName AND I.CreateTime BETWEEN '" + start + "' AND '" + end + "') AS InCnt," +
 " (SELECT ISNULL(SUM(O.Cnt),0) FROM SupplyDetail O WHERE Model=N.Model AND NormName=N.NormName AND O.CreateTime BETWEEN '" + start + "' AND '" + end + "') AS OutCnt," +
 " (SELECT ISNULL(SUM(X.SumMoney),0) FROM SupplyDetail X WHERE Model=N.Model AND NormName=N.NormName AND X.CreateTime BETWEEN '" + start + "' AND '" + end + "') AS OutMoney," +
-" GETDATE() AS NowTime FROM InWDetail N Group BY Model,NormName ORDER BY Model ASC";
+" GETDATE() AS NowTime FROM InWDetail N Group BY Model,NormName ORDER BY Model ASC";    // SQL Server 用
+             */
+            string sql = "SELECT Model,NormName,"+
+                "(SELECT iif(ISNULL(SUM(I.Cnt)),0,SUM(I.Cnt)) FROM InWDetail as I WHERE I.Model=N.Model AND I.NormName=N.NormName AND I.CreateTime BETWEEN #" + start +  "# AND #" + end +"#) AS InCnt,"+
+                "(SELECT iif(ISNULL(SUM(O.Cnt)),0,SUM(O.Cnt)) FROM SupplyDetail as O WHERE O.Model=N.Model AND O.NormName=N.NormName AND O.CreateTime BETWEEN #" + start + "# AND #" + end + "#) AS OutCnt," +
+                "(SELECT iif(ISNULL(SUM(X.SumMoney)),0,SUM(X.SumMoney)) FROM SupplyDetail as X WHERE X.Model=N.Model AND X.NormName=N.NormName AND X.CreateTime BETWEEN #" + start + "# AND #" + end + "#) AS OutMoney," +
+                "DATE() AS NowTime FROM InWDetail N Group BY Model,NormName ORDER BY Model ASC";    // Access 用，日期用 # 括起来
             DataSet ds = DbHelperSQL.Query(sql);    // 项目 SqlServerDAL 的 DbHelperSQL 类
             DataTable dt = ds.Tables[0];
 

@@ -10,6 +10,8 @@ using Microsoft.Reporting.WinForms; // 不需要手动引入 Microsoft.ReportVie
 using Common;
 using SqlServer;
 
+using SqlServerDAL;
+
 namespace Warehouse
 {
     public partial class frmSupplyReport : Form
@@ -45,7 +47,9 @@ namespace Warehouse
 
             string _barStr = "";
             string sql = "SELECT Model,Barcode FROM SupplyDetail WHERE SupplyID='" + _supplyID + "' ORDER BY Model,Barcode ASC";
-            DataTable dt = SqlHelper.ExecuteDataTable(sql); // 项目 SqlServer 内的 SqlHelper 类
+
+            //DataTable dt = SqlHelper.ExecuteDataTable(sql); // 项目 SqlServer 内的 SqlHelper 类,将弃用
+            DataTable dt = DbHelperSQL.Query(sql).Tables[0];
             if (dt != null && dt.Rows.Count > 0)
             {
                 string _modelNow = "";
@@ -94,8 +98,10 @@ namespace Warehouse
         private DataTable GetGroupSupply(out decimal sum)
         {
             decimal _s = 0;
-            string sql = "SELECT Model as 型号,(NormName + '米') as 规格,(cast(Length as Varchar) + '米') as 长度,(CAST(COUNT(Barcode) as Varchar)+'卷') as 数量,Cast(Max(SumMoney) as decimal(10,2)) as 每卷价格,Cast(Sum(SumMoney) as decimal(10,2)) as 金额 FROM SupplyDetail WHERE SupplyID='" + _supplyID + "' GROUP BY Model,NormName,Length  ORDER By Model,NormName ASC";
-            DataTable dt = SqlHelper.ExecuteDataTable(sql); // 项目 SqlServer 内的 SqlHelper 类
+            //string sql = "SELECT Model as 型号,(NormName + '米') as 规格,(cast(Length as Varchar) + '米') as 长度,(CAST(COUNT(Barcode) as Varchar)+'卷') as 数量,Cast(Max(SumMoney) as decimal(10,2)) as 每卷价格,Cast(Sum(SumMoney) as decimal(10,2)) as 金额 FROM SupplyDetail WHERE SupplyID='" + _supplyID + "' GROUP BY Model,NormName,Length ORDER By Model,NormName ASC"; // SQL Server 用
+            string sql = "SELECT Model as 型号,(NormName + '米') as 规格,(str(Length) + '米') as 长度,(str(COUNT(Barcode))+'卷') as 数量,CDbl(Max(SumMoney)) as 每卷价格,CDbl(Sum(SumMoney)) as 金额 FROM SupplyDetail WHERE SupplyID='" + _supplyID +"' GROUP BY Model,NormName,Length ORDER By Model,NormName ASC";    // Access 用
+            //DataTable dt = SqlHelper.ExecuteDataTable(sql); // 项目 SqlServer 内的 SqlHelper 类，将弃用
+            DataTable dt = DbHelperSQL.Query(sql).Tables[0];
             if (dt != null && dt.Rows.Count > 0)
             {
                 foreach (DataRow dr in dt.Rows)

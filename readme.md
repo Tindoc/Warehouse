@@ -4,8 +4,8 @@
 >
 > - 整理了项目结构，使得更清晰
 > - 解决原项目存在的 Bug，原项目存在的 Bug 可以在文件 [DebugList.md](./DebugList.md) 中查看
-> - 在代码中添加了十足的注释，便于理解项目（毕竟是学习项目）
-> - 根据原项目逆推出 [需求文档](./Documents/需求分析.md) 和 [使用文档](./Documents/使用文档.doc) ，便于理解项目（毕竟是学习项目）
+> - 在代码中添加了十足的注释，便于理解项目
+> - 根据原项目逆推出 [需求文档](./Documents/需求分析.md) 和 [使用文档](./Documents/使用文档.doc) ，便于理解项目
 > - 其他一些小修改
 
 
@@ -52,11 +52,19 @@
 
 ## 项目使用
 
-下载或者 clone 本项目的 Tag：version 1.0 版本（没有延续原项目的版本号）
+1. SQL Server 环境
 
-根据文件 [DatabaseSetting/readme.md](./DatabaseSetting/readme.md) 的提示配置数据库环境
+    下载或者 clone 本项目的 Tag: v1.0（没有延续原项目的版本号）	
 
-在 Warehouse 项目的配置文件中添加数据库连接字符串即可使用
+    根据文件 [DatabaseSetting/readme.md](./DatabaseSetting/readme.md) 的提示配置数据库环境
+
+    在 Warehouse 项目的配置文件中添加数据库连接字符串即可使用
+
+2. Access 环境
+
+    下载或者 clone 本项目的 Tag: v1.1 （在 v1.0 上修改而来，仅支持 Access ，不再支持 SQL Server(但保留了需要的代码)）
+
+    在 Warehouse 项目的配置文件中添加 Access 数据库文件的连接字符串即可使用
 
 > 项目在本机编译测试无误，但无法保证任何主机都能如此。如果在你的系统上出现编译错误，还请根据编译提示自行修复
 

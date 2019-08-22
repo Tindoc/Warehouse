@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Data;
 using System.Text;
+
 using System.Data.SqlClient;
 using SqlServerDAL;
+
 using System.Collections.Generic;
 using System.Collections;
+
+using System.Data.OleDb;
 
 namespace Warehouse
 {
@@ -146,9 +150,9 @@ namespace Warehouse
         //    strSql.Append("select * ");
         //    strSql.Append(" FROM [InW] ");
         //    strSql.Append(" where Batch=@Batch and ID=@ID ");
-        //    SqlParameter[] parameters = {
-        //            new SqlParameter("@Batch", Batch),
-        //            new SqlParameter("@ID", ID)};
+        //    OleDbParameter[] parameters = {
+        //            new OleDbParameter("@Batch", Batch),
+        //            new OleDbParameter("@ID", ID)};
 
         //    DataSet ds=DbHelperSQL.Query(strSql.ToString(),parameters);
         //    if(ds.Tables[0].Rows.Count>0)
@@ -197,8 +201,8 @@ namespace Warehouse
             strSql.Append("select count(1) from [InW]");
             strSql.Append(" where Batch=@Batch ");
 
-            SqlParameter[] parameters = {
-					new SqlParameter("@Batch", Batch)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@Batch", Batch)};
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
@@ -208,20 +212,20 @@ namespace Warehouse
         /// </summary>
         public int Add(List<string> list)
         {
-            SqlParameter[] parameters = {
-					new SqlParameter("@Batch", Batch),
-                    new SqlParameter("@Model", Model),
-					new SqlParameter("@NormName", NormName),
-					new SqlParameter("@Barcode", Barcode),
-					new SqlParameter("@Cnt", Cnt),
-                    new SqlParameter("@BigCnt", BigCnt),
-                    new SqlParameter("@Machine", Machine),
-                    new SqlParameter("@Length", Length),
-                    new SqlParameter("@InTime", InTime),
-                    new SqlParameter("@Operator", Operator)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@Batch", Batch),
+                    new OleDbParameter("@NormName", NormName),
+                    new OleDbParameter("@Length", Length),
+                    new OleDbParameter("@Model", Model),
+                    new OleDbParameter("@Barcode", Barcode),
+                    new OleDbParameter("@BigCnt", BigCnt),
+					new OleDbParameter("@Cnt", Cnt),
+                    new OleDbParameter("@Operator", Operator),
+                    new OleDbParameter("@InTime", InTime),
+                    new OleDbParameter("@Machine", Machine)};
 
             List<string> sqlT = new List<string>();
-            sqlT.Add("insert into [InW] (Batch,NormName,Barcode,BigCnt,Cnt,Operator,InTime,Machine,Length,Model) values (@Batch,@NormName,@Barcode,@BigCnt,@Cnt,@Operator,@InTime,@Machine,@Length,@Model);");
+            sqlT.Add("insert into [InW] (Batch,NormName,Length,Model,Barcode,BigCnt,Cnt,Operator,InTime,Machine) values (@Batch,@NormName,@Length,@Model,@Barcode,@BigCnt,@Cnt,@Operator,@InTime,@Machine);");
             if (list.Count > 0)
             {
                 foreach (string s in list)
@@ -250,12 +254,12 @@ namespace Warehouse
             strSql.Append("Barcode=@Barcode,");
             strSql.Append("Cnt=@Cnt");
             strSql.Append(" where Batch=@Batch and ID=@ID ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@NormName", SqlDbType.VarChar,50),
-					new SqlParameter("@Barcode", SqlDbType.VarChar,100),
-					new SqlParameter("@Cnt", SqlDbType.Int,4),
-					new SqlParameter("@ID", SqlDbType.Int,4),
-					new SqlParameter("@Batch", SqlDbType.VarChar,50)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@NormName", OleDbType.VarChar,50),
+					new OleDbParameter("@Barcode", OleDbType.VarChar,100),
+					new OleDbParameter("@Cnt", OleDbType.Integer,4),
+					new OleDbParameter("@Batch", OleDbType.VarChar,50),
+					new OleDbParameter("@ID", OleDbType.Integer,4)};
             parameters[0].Value = NormName;
             parameters[1].Value = Barcode;
             parameters[2].Value = Cnt;
@@ -278,8 +282,8 @@ namespace Warehouse
         /// </summary>
         public int Delete(string batch)
         {
-            SqlParameter[] parameters = {
-					new SqlParameter("@Batch", batch)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@Batch", batch)};
 
             List<string> sqlT = new List<string>();
             sqlT.Add("delete from [InW] where Batch=@Batch;");
@@ -307,8 +311,8 @@ namespace Warehouse
         //    strSql.Append("select * ");
         //    strSql.Append(" FROM [InW]");
         //    strSql.Append(" where Batch=@Batch ");
-        //    SqlParameter[] parameters = {
-        //            new SqlParameter("@Batch", batch)};
+        //    OleDbParameter[] parameters = {
+        //            new OleDbParameter("@Batch", batch)};
 
         //    return GetOneModel(strSql, parameters);
         //}
@@ -321,13 +325,13 @@ namespace Warehouse
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select * FROM InWDetail");// strSql.Append(" FROM [InW] A JOIN InWDetail B ON A.Batch=B.BatchID");
             strSql.Append(" where Barcode=@Barcode ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@Barcode", code)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@Barcode", code)};
 
             return GetOneModel(strSql, parameters);
         }
 
-        private InW GetOneModel(StringBuilder strSql, SqlParameter[] parameters)
+        private InW GetOneModel(StringBuilder strSql, OleDbParameter[] parameters)
         {
 
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);

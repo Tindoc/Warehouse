@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Data;
 using System.Text;
+
 using System.Data.SqlClient;
 using SqlServerDAL;
+
+using System.Data.OleDb;
+
 namespace Warehouse
 {
     /// <summary>
@@ -98,12 +102,12 @@ namespace Warehouse
             strSql.Append("BatchID,Barcode,NormName,Cnt,CreateTime)");
             strSql.Append(" values (");
             strSql.Append("@BatchID,@Barcode,@NormName,@Cnt,@CreateTime)");
-            SqlParameter[] parameters = {
-					new SqlParameter("@BatchID", SqlDbType.VarChar,50),
-					new SqlParameter("@Barcode", SqlDbType.VarChar,50),
-					new SqlParameter("@NormName", SqlDbType.VarChar,50),
-					new SqlParameter("@Cnt", SqlDbType.Int,4),
-					new SqlParameter("@CreateTime", SqlDbType.VarChar,50)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@BatchID", OleDbType.VarChar,50),
+					new OleDbParameter("@Barcode", OleDbType.VarChar,50),
+					new OleDbParameter("@NormName", OleDbType.VarChar,50),
+					new OleDbParameter("@Cnt", OleDbType.Integer,4),
+					new OleDbParameter("@CreateTime", OleDbType.VarChar,50)};
             parameters[0].Value = BatchID;
             parameters[1].Value = Barcode;
             parameters[2].Value = NormName;
@@ -126,12 +130,12 @@ namespace Warehouse
             strSql.Append("Cnt=@Cnt,");
             strSql.Append("CreateTime=@CreateTime");
             //strSql.Append(" where 条件);
-            SqlParameter[] parameters = {
-					new SqlParameter("@BatchID", SqlDbType.VarChar,50),
-					new SqlParameter("@Barcode", SqlDbType.VarChar,50),
-					new SqlParameter("@NormName", SqlDbType.VarChar,50),
-					new SqlParameter("@Cnt", SqlDbType.Int,4),
-					new SqlParameter("@CreateTime", SqlDbType.VarChar,50)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@BatchID", OleDbType.VarChar,50),
+					new OleDbParameter("@Barcode", OleDbType.VarChar,50),
+					new OleDbParameter("@NormName", OleDbType.VarChar,50),
+					new OleDbParameter("@Cnt", OleDbType.Integer,4),
+					new OleDbParameter("@CreateTime", OleDbType.VarChar,50)};
             parameters[0].Value = BatchID;
             parameters[1].Value = Barcode;
             parameters[2].Value = NormName;
@@ -149,7 +153,7 @@ namespace Warehouse
             StringBuilder strSql = new StringBuilder();
             strSql.Append("delete from InWDetail ");
             //strSql.Append(" where 条件);
-            SqlParameter[] parameters = {};
+            OleDbParameter[] parameters = {};
 
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
         }
@@ -163,7 +167,7 @@ namespace Warehouse
             strSql.Append("select top 1 BatchID,Barcode,NormName,Cnt,CreateTime ");
             strSql.Append(" FROM InWDetail ");
             //strSql.Append(" where 条件);
-            SqlParameter[] parameters = {};
+            OleDbParameter[] parameters = {};
 
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
             if (ds.Tables[0].Rows.Count > 0)
@@ -200,9 +204,10 @@ namespace Warehouse
         /// </summary>
         public void UpdatePrintCnt(string barcode)
         {
-            SqlParameter[] parameters = {
-					new SqlParameter("@Barcode", barcode)};
-            string strSql = "update InWDetail set PrintCnt=isnull(PrintCnt,0)+1 where Barcode=@Barcode";
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@Barcode", barcode)};
+            //string strSql = "update InWDetail set PrintCnt=isnull(PrintCnt,0)+1 where Barcode=@Barcode";    // SQL Server 用
+            string strSql = "update InWDetail set PrintCnt=iif(isnull(PrintCnt),0,PrintCnt)+1 where Barcode=@Barcode";    // Access 用,其中 iif
             DbHelperSQL.ExecuteSql(strSql, parameters);
         }
         #endregion  成员方法

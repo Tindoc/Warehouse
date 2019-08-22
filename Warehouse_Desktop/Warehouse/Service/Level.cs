@@ -5,6 +5,8 @@ using System.Text;
 using System.Data.SqlClient;
 using SqlServerDAL;
 
+using System.Data.OleDb;
+
 namespace Warehouse
 {
     /// <summary>
@@ -55,8 +57,8 @@ namespace Warehouse
             strSql.Append("select LevelID,LevelName ");
             strSql.Append(" FROM [Level] ");
             strSql.Append(" where LevelID=@LevelID ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@LevelID", SqlDbType.Int,4)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@LevelID", OleDbType.Integer,4)};
             parameters[0].Value = LevelID;
 
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
@@ -78,7 +80,6 @@ namespace Warehouse
         /// </summary>
         public int GetMaxId()
         {
-
             return DbHelperSQL.GetMaxID("LevelID", "Level");
         }
 
@@ -91,8 +92,8 @@ namespace Warehouse
             strSql.Append("select count(1) from [Level]");
             strSql.Append(" where LevelName=@LevelName ");
 
-            SqlParameter[] parameters = {
-					new SqlParameter("@LevelName",name)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@LevelName",name)};
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
@@ -108,12 +109,13 @@ namespace Warehouse
             strSql.Append("LevelName,Price)");
             strSql.Append(" values (");
             strSql.Append("@LevelName,@Price)");
-            strSql.Append(";select @@IDENTITY");
-            SqlParameter[] parameters = {
-					new SqlParameter("@LevelName", LevelName),
-                    new SqlParameter("@Price", Price)};
+            //strSql.Append(";select @@IDENTITY");  // SQL Server 用，Access 一次只能执行一条 SQL
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@LevelName", LevelName),
+                    new OleDbParameter("@Price", Price)};
 
-            object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
+            //object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);    // SQL Server 用
+            object obj = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters); // Access 用
             if (obj == null)
             {
                 return 0;
@@ -129,12 +131,13 @@ namespace Warehouse
         public bool Update()
         {
             StringBuilder strSql = new StringBuilder();
+
             strSql.Append("update [Level] set ");
             strSql.Append("Price=@Price");
             strSql.Append(" where LevelName=@LevelName ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@LevelName", LevelName),
-					new SqlParameter("@Price", Price)};
+            OleDbParameter[] parameters = {
+                    new OleDbParameter("@Price", Price),
+                    new OleDbParameter("@LevelName", LevelName)};
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -156,8 +159,8 @@ namespace Warehouse
             StringBuilder strSql = new StringBuilder();
             strSql.Append("delete from [Level] ");
             strSql.Append(" where LevelName=@LevelName ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@LevelName", name)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@LevelName", name)};
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -180,8 +183,8 @@ namespace Warehouse
             strSql.Append("select * ");
             strSql.Append(" FROM [Level] ");
             strSql.Append(" where LevelName=@LevelName ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@LevelName", name)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@LevelName", name)};
 
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
             if (ds.Tables[0].Rows.Count > 0)

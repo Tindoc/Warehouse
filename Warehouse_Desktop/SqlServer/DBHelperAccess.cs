@@ -4,19 +4,17 @@ using System.Text;
 using System.Collections;
 
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.OleDb;
 using System.Configuration;
 
 namespace SqlServerDAL
 {
-    public class DbHelperSQL_comment
+    public class DbHelperSQL
     {
-        //数据库连接字符串(web.config来配置)
-        //<add key="ConnectionString" value="server=127.0.0.1;database=DATABASE;uid=sa;pwd=" />		
-        protected static string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;//ConfigurationSettings.AppSettings["ConnectionString"];
-        // ConfigurationManager 需要添加 System.configuration 引用
+        protected static string connectionString = ConfigurationManager.ConnectionStrings["AccessConnectionString"].ConnectionString;
 
-        public DbHelperSQL_comment(){ } // 构造函数
+        // 构造函数
+        public DbHelperSQL(){ }
 
         #region 公用方法
         public static int GetMaxID(string FieldName, string TableName)
@@ -33,7 +31,7 @@ namespace SqlServerDAL
             }
         }
 
-        public static bool Exists(string strSql, params SqlParameter[] cmdParms)
+        public static bool Exists(string strSql, params OleDbParameter[] cmdParms)
         {
             object obj = GetSingle(strSql, cmdParms);
             int cmdresult;
@@ -64,9 +62,9 @@ namespace SqlServerDAL
         /// <returns>影响的记录数</returns>
         public static int ExecuteSql(string SQLString)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand(SQLString, connection))
+                using (OleDbCommand cmd = new OleDbCommand(SQLString, connection))
                 {
                     try
                     {
@@ -89,12 +87,12 @@ namespace SqlServerDAL
         /// <param name="SQLStringList">多条SQL语句</param>		
         public static void ExecuteSqlTran(ArrayList SQLStringList)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (OleDbConnection conn = new OleDbConnection(connectionString))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand();
+                OleDbCommand cmd = new OleDbCommand();
                 cmd.Connection = conn;
-                SqlTransaction tx = conn.BeginTransaction();
+                OleDbTransaction tx = conn.BeginTransaction();
                 cmd.Transaction = tx;
                 try
                 {
@@ -125,10 +123,10 @@ namespace SqlServerDAL
         /// <returns>影响的记录数</returns>
         public static int ExecuteSql(string SQLString, string content)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand(SQLString, connection);
-                System.Data.SqlClient.SqlParameter myParameter = new System.Data.SqlClient.SqlParameter("@content", SqlDbType.NText);
+                OleDbCommand cmd = new OleDbCommand(SQLString, connection);
+                System.Data.OleDb.OleDbParameter myParameter = new System.Data.OleDb.OleDbParameter("@content", SqlDbType.NText);
                 myParameter.Value = content;
                 cmd.Parameters.Add(myParameter);
                 try
@@ -157,10 +155,10 @@ namespace SqlServerDAL
         /// <returns>影响的记录数</returns>
         public static int ExecuteSqlInsertImg(string strSQL, byte[] fs)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand(strSQL, connection);
-                System.Data.SqlClient.SqlParameter myParameter = new System.Data.SqlClient.SqlParameter("@fs", SqlDbType.Image);
+                OleDbCommand cmd = new OleDbCommand(strSQL, connection);
+                System.Data.OleDb.OleDbParameter myParameter = new System.Data.OleDb.OleDbParameter("@fs", SqlDbType.Image);
                 myParameter.Value = fs;
                 cmd.Parameters.Add(myParameter);
                 try
@@ -188,9 +186,9 @@ namespace SqlServerDAL
         /// <returns>查询结果（object）</returns>
         public static object GetSingle(string SQLString)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand(SQLString, connection))
+                using (OleDbCommand cmd = new OleDbCommand(SQLString, connection))
                 {
                     try
                     {
@@ -215,18 +213,18 @@ namespace SqlServerDAL
         }
 
         /// <summary>
-        /// 执行查询语句，返回SqlDataReader
+        /// 执行查询语句，返回OleDbDataReader
         /// </summary>
         /// <param name="strSQL">查询语句</param>
-        /// <returns>SqlDataReader</returns>
-        public static SqlDataReader ExecuteReader(string strSQL)
+        /// <returns>OleDbDataReader</returns>
+        public static OleDbDataReader ExecuteReader(string strSQL)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(strSQL, connection);
+            OleDbConnection connection = new OleDbConnection(connectionString);
+            OleDbCommand cmd = new OleDbCommand(strSQL, connection);
             try
             {
                 connection.Open();
-                SqlDataReader myReader = cmd.ExecuteReader();
+                OleDbDataReader myReader = cmd.ExecuteReader();
                 return myReader;
             }
             catch (System.Data.SqlClient.SqlException e)
@@ -243,13 +241,13 @@ namespace SqlServerDAL
         /// <returns>DataSet</returns>
         public static DataSet Query(string SQLString)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
                 DataSet ds = new DataSet();
                 try
                 {
                     connection.Open();
-                    SqlDataAdapter command = new SqlDataAdapter(SQLString, connection);
+                    OleDbDataAdapter command = new OleDbDataAdapter(SQLString, connection);
                     command.Fill(ds, "ds");
                 }
                 catch (System.Data.SqlClient.SqlException ex)
@@ -267,11 +265,11 @@ namespace SqlServerDAL
         /// </summary>
         /// <param name="SQLString">SQL语句</param>
         /// <returns>影响的记录数</returns>
-        public static int ExecuteSql(string SQLString, params SqlParameter[] cmdParms)
+        public static int ExecuteSql(string SQLString, params OleDbParameter[] cmdParms)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand())
+                using (OleDbCommand cmd = new OleDbCommand())
                 {
                     try
                     {
@@ -291,22 +289,22 @@ namespace SqlServerDAL
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
-        /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>
+        /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的OleDbParameter[]）</param>
         public static void ExecuteSqlTran(Hashtable SQLStringList)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (OleDbConnection conn = new OleDbConnection(connectionString))
             {
                 conn.Open();
-                using (SqlTransaction trans = conn.BeginTransaction())
+                using (OleDbTransaction trans = conn.BeginTransaction())
                 {
-                    SqlCommand cmd = new SqlCommand();
+                    OleDbCommand cmd = new OleDbCommand();
                     try
                     {
                         //循环
                         foreach (DictionaryEntry myDE in SQLStringList)
                         {
                             string cmdText = myDE.Key.ToString();
-                            SqlParameter[] cmdParms = (SqlParameter[])myDE.Value;
+                            OleDbParameter[] cmdParms = (OleDbParameter[])myDE.Value;
                             PrepareCommand(cmd, conn, trans, cmdText, cmdParms);
                             int val = cmd.ExecuteNonQuery();
                             cmd.Parameters.Clear();
@@ -328,11 +326,11 @@ namespace SqlServerDAL
         /// </summary>
         /// <param name="SQLString">计算查询结果语句</param>
         /// <returns>查询结果（object）</returns>
-        public static object GetSingle(string SQLString, params SqlParameter[] cmdParms)
+        public static object GetSingle(string SQLString, params OleDbParameter[] cmdParms)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand())
+                using (OleDbCommand cmd = new OleDbCommand())
                 {
                     try
                     {
@@ -357,18 +355,18 @@ namespace SqlServerDAL
         }
 
         /// <summary>
-        /// 执行查询语句，返回SqlDataReader
+        /// 执行查询语句，返回OleDbDataReader
         /// </summary>
         /// <param name="strSQL">查询语句</param>
-        /// <returns>SqlDataReader</returns>
-        public static SqlDataReader ExecuteReader(string SQLString, params SqlParameter[] cmdParms)
+        /// <returns>OleDbDataReader</returns>
+        public static OleDbDataReader ExecuteReader(string SQLString, params OleDbParameter[] cmdParms)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand();
+            OleDbConnection connection = new OleDbConnection(connectionString);
+            OleDbCommand cmd = new OleDbCommand();
             try
             {
                 PrepareCommand(cmd, connection, null, SQLString, cmdParms);
-                SqlDataReader myReader = cmd.ExecuteReader();
+                OleDbDataReader myReader = cmd.ExecuteReader();
                 cmd.Parameters.Clear();
                 return myReader;
             }
@@ -384,13 +382,13 @@ namespace SqlServerDAL
         /// </summary>
         /// <param name="SQLString">查询语句</param>
         /// <returns>DataSet</returns>
-        public static DataSet Query(string SQLString, params SqlParameter[] cmdParms)
+        public static DataSet Query(string SQLString, params OleDbParameter[] cmdParms)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand();
+                OleDbCommand cmd = new OleDbCommand();
                 PrepareCommand(cmd, connection, null, SQLString, cmdParms);
-                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                using (OleDbDataAdapter da = new OleDbDataAdapter(cmd))
                 {
                     DataSet ds = new DataSet();
                     try
@@ -407,7 +405,7 @@ namespace SqlServerDAL
             }
         }
 
-        private static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, SqlParameter[] cmdParms)
+        private static void PrepareCommand(OleDbCommand cmd, OleDbConnection conn, OleDbTransaction trans, string cmdText, OleDbParameter[] cmdParms)
         {
             if (conn.State != ConnectionState.Open)
                 conn.Open();
@@ -418,7 +416,7 @@ namespace SqlServerDAL
             cmd.CommandType = CommandType.Text;//cmdType;
             if (cmdParms != null)
             {
-                foreach (SqlParameter parm in cmdParms)
+                foreach (OleDbParameter parm in cmdParms)
                     cmd.Parameters.Add(parm);
             }
         }
@@ -430,13 +428,13 @@ namespace SqlServerDAL
         /// </summary>
         /// <param name="storedProcName">存储过程名</param>
         /// <param name="parameters">存储过程参数</param>
-        /// <returns>SqlDataReader</returns>
-        public static SqlDataReader RunProcedure(string storedProcName, IDataParameter[] parameters)
+        /// <returns>OleDbDataReader</returns>
+        public static OleDbDataReader RunProcedure(string storedProcName, IDataParameter[] parameters)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlDataReader returnReader;
+            OleDbConnection connection = new OleDbConnection(connectionString);
+            OleDbDataReader returnReader;
             connection.Open();
-            SqlCommand command = BuildQueryCommand(connection, storedProcName, parameters);
+            OleDbCommand command = BuildQueryCommand(connection, storedProcName, parameters);
             command.CommandType = CommandType.StoredProcedure;
             returnReader = command.ExecuteReader();
             return returnReader;
@@ -451,11 +449,11 @@ namespace SqlServerDAL
         /// <returns>DataSet</returns>
         public static DataSet RunProcedure(string storedProcName, IDataParameter[] parameters, string tableName)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
                 DataSet dataSet = new DataSet();
                 connection.Open();
-                SqlDataAdapter sqlDA = new SqlDataAdapter();
+                OleDbDataAdapter sqlDA = new OleDbDataAdapter();
                 sqlDA.SelectCommand = BuildQueryCommand(connection, storedProcName, parameters);
                 sqlDA.Fill(dataSet, tableName);
                 connection.Close();
@@ -464,17 +462,17 @@ namespace SqlServerDAL
         }
 
         /// <summary>
-        /// 构建 SqlCommand 对象(用来返回一个结果集，而不是一个整数值)
+        /// 构建 OleDbCommand 对象(用来返回一个结果集，而不是一个整数值)
         /// </summary>
         /// <param name="connection">数据库连接</param>
         /// <param name="storedProcName">存储过程名</param>
         /// <param name="parameters">存储过程参数</param>
-        /// <returns>SqlCommand</returns>
-        private static SqlCommand BuildQueryCommand(SqlConnection connection, string storedProcName, IDataParameter[] parameters)
+        /// <returns>OleDbCommand</returns>
+        private static OleDbCommand BuildQueryCommand(OleDbConnection connection, string storedProcName, IDataParameter[] parameters)
         {
-            SqlCommand command = new SqlCommand(storedProcName, connection);
+            OleDbCommand command = new OleDbCommand(storedProcName, connection);
             command.CommandType = CommandType.StoredProcedure;
-            foreach (SqlParameter parameter in parameters)
+            foreach (OleDbParameter parameter in parameters)
             {
                 command.Parameters.Add(parameter);
             }
@@ -490,11 +488,11 @@ namespace SqlServerDAL
         /// <returns></returns>
         public static int RunProcedure(string storedProcName, IDataParameter[] parameters, out int rowsAffected)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
                 int result;
                 connection.Open();
-                SqlCommand command = BuildIntCommand(connection, storedProcName, parameters);
+                OleDbCommand command = BuildIntCommand(connection, storedProcName, parameters);
                 rowsAffected = command.ExecuteNonQuery();
                 result = (int)command.Parameters["ReturnValue"].Value;
                 //Connection.Close();
@@ -503,16 +501,16 @@ namespace SqlServerDAL
         }
 
         /// <summary>
-        /// 创建 SqlCommand 对象实例(用来返回一个整数值)	
+        /// 创建 OleDbCommand 对象实例(用来返回一个整数值)	
         /// </summary>
         /// <param name="storedProcName">存储过程名</param>
         /// <param name="parameters">存储过程参数</param>
-        /// <returns>SqlCommand 对象实例</returns>
-        private static SqlCommand BuildIntCommand(SqlConnection connection, string storedProcName, IDataParameter[] parameters)
+        /// <returns>OleDbCommand 对象实例</returns>
+        private static OleDbCommand BuildIntCommand(OleDbConnection connection, string storedProcName, IDataParameter[] parameters)
         {
-            SqlCommand command = BuildQueryCommand(connection, storedProcName, parameters);
-            command.Parameters.Add(new SqlParameter("ReturnValue",
-                SqlDbType.Int, 4, ParameterDirection.ReturnValue,
+            OleDbCommand command = BuildQueryCommand(connection, storedProcName, parameters);
+            command.Parameters.Add(new OleDbParameter("ReturnValue",
+                OleDbType.Integer, 4, ParameterDirection.ReturnValue,
                 false, 0, 0, string.Empty, DataRowVersion.Default, null));
             return command;
         }
@@ -524,18 +522,18 @@ namespace SqlServerDAL
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public static int NewExecTransaction(string[] sqlT, params SqlParameter[] commandParameters)
+        public static int NewExecTransaction(string[] sqlT, params OleDbParameter[] commandParameters)
         {
-            SqlConnection conn = new SqlConnection(connectionString);
+            OleDbConnection conn = new OleDbConnection(connectionString);
 
-            SqlTransaction sTransaction = null;
+            OleDbTransaction sTransaction = null;
             try
             {
                 conn.Open();
-                SqlCommand com = conn.CreateCommand();
+                OleDbCommand com = conn.CreateCommand();
                 sTransaction = conn.BeginTransaction();
                 com.Transaction = sTransaction;
-                foreach (SqlParameter parm in commandParameters)
+                foreach (OleDbParameter parm in commandParameters)
                 {
                     com.Parameters.Add(parm);
                 }

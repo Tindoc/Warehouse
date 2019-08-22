@@ -7,6 +7,8 @@ using System.Data;
 using System.Data.SqlClient;
 using SqlServerDAL;
 
+using System.Data.OleDb;
+
 namespace Warehouse
 {
     /// <summary>
@@ -46,8 +48,8 @@ namespace Warehouse
             strSql.Append("select NormID,NormName ");
             strSql.Append(" FROM [Norm] ");
             strSql.Append(" where NormID=@NormID ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@NormID", SqlDbType.Int,4)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@NormID", OleDbType.Integer ,4)};
             parameters[0].Value = NormID;
 
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
@@ -81,8 +83,8 @@ namespace Warehouse
             strSql.Append("select count(1) from [Norm]");
             strSql.Append(" where NormName=@NormName");
 
-            SqlParameter[] parameters = {
-					new SqlParameter("@NormName", name)};
+            OleDbParameter[] parameters = {
+                    new OleDbParameter("@NormName", name)};
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
@@ -96,13 +98,14 @@ namespace Warehouse
             strSql.Append("insert into [Norm] (");
             strSql.Append("NormName)");
             strSql.Append(" values (");
-            strSql.Append("@NormName)");
-            strSql.Append(";select @@IDENTITY");
-            SqlParameter[] parameters = {
-					new SqlParameter("@NormName", SqlDbType.VarChar,50)};
+            strSql.Append("@NormName);");
+            //strSql.Append(";select @@IDENTITY");  // Access 一次只能执行一条 SQL，所以注释
+            OleDbParameter[] parameters = {
+                    new OleDbParameter("@NormName", OleDbType.VarChar, 50)};
             parameters[0].Value = NormName;
 
-            object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
+            //object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);    // SQL Server 用
+            object obj = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);    // Access 用
             if (obj == null)
             {
                 return 0;
@@ -122,9 +125,9 @@ namespace Warehouse
             strSql.Append("update [Norm] set ");
             strSql.Append("NormName=@NormName");
             strSql.Append(" where NormID=@NormID ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@NormName", SqlDbType.VarChar,50),
-					new SqlParameter("@NormID", SqlDbType.Int,4)};
+            OleDbParameter[] parameters = {
+                    new OleDbParameter("@NormName", OleDbType.VarChar, 50),
+                    new OleDbParameter("@NormID", OleDbType.Integer, 4)};
             parameters[0].Value = NormName;
             parameters[1].Value = NormID;
 
@@ -148,8 +151,8 @@ namespace Warehouse
             StringBuilder strSql = new StringBuilder();
             strSql.Append("delete from [Norm] ");
             strSql.Append(" where NormName=@NormName ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@NormName", name)};
+            OleDbParameter[] parameters = {
+                    new OleDbParameter("@NormName", name)};
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -171,8 +174,8 @@ namespace Warehouse
             strSql.Append("select NormID,NormName ");
             strSql.Append(" FROM [Norm] ");
             strSql.Append(" where NormID=@NormID ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@NormID", SqlDbType.Int,4)};
+            OleDbParameter[] parameters = {
+                    new OleDbParameter("@NormID", OleDbType.Integer, 4)};
             parameters[0].Value = NormID;
 
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);

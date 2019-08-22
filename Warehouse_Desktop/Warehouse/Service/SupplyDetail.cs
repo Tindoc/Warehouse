@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Data;
 using System.Text;
-using System.Data.SqlClient;
 
+using System.Data.SqlClient;
 using SqlServerDAL;
+
+using System.Data.OleDb;
 
 namespace Warehouse
 {
@@ -97,7 +99,7 @@ namespace Warehouse
         //            strSql.Append("select SupplyID,Barcode,NormName,Price,SumMoney,Cnt ");
         //            strSql.Append(" FROM SupplyDetail ");
         //            //strSql.Append(" where 条件);
-        //            SqlParameter[] parameters = {
+        //            OleDbParameter[] parameters = {
         //};
 
         //            DataSet ds=DbHelperSQL.Query(strSql.ToString(),parameters);
@@ -144,13 +146,13 @@ namespace Warehouse
             strSql.Append("SupplyID,Barcode,NormName,Price,SumMoney,Cnt)");
             strSql.Append(" values (");
             strSql.Append("@SupplyID,@Barcode,@NormName,@Price,@SumMoney,@Cnt)");
-            SqlParameter[] parameters = {
-					new SqlParameter("@SupplyID", SqlDbType.VarChar,50),
-					new SqlParameter("@Barcode", SqlDbType.VarChar,50),
-					new SqlParameter("@NormName", SqlDbType.VarChar,50),
-					new SqlParameter("@Price", SqlDbType.Money,8),
-					new SqlParameter("@SumMoney", SqlDbType.Money,8),
-					new SqlParameter("@Cnt", SqlDbType.Int,4)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@SupplyID", OleDbType.VarChar,50),
+					new OleDbParameter("@Barcode", OleDbType.VarChar,50),
+					new OleDbParameter("@NormName", OleDbType.VarChar,50),
+					new OleDbParameter("@Price", OleDbType.Numeric,8),
+					new OleDbParameter("@SumMoney", OleDbType.Numeric,8),
+					new OleDbParameter("@Cnt", OleDbType.Integer,4)};
             parameters[0].Value = SupplyID;
             parameters[1].Value = Barcode;
             parameters[2].Value = NormName;
@@ -174,13 +176,13 @@ namespace Warehouse
             strSql.Append("SumMoney=@SumMoney,");
             strSql.Append("Cnt=@Cnt");
             //strSql.Append(" where 条件);
-            SqlParameter[] parameters = {
-					new SqlParameter("@SupplyID", SqlDbType.VarChar,50),
-					new SqlParameter("@Barcode", SqlDbType.VarChar,50),
-					new SqlParameter("@NormName", SqlDbType.VarChar,50),
-					new SqlParameter("@Price", SqlDbType.Money,8),
-					new SqlParameter("@SumMoney", SqlDbType.Money,8),
-					new SqlParameter("@Cnt", SqlDbType.Int,4)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@SupplyID", OleDbType.VarChar,50),
+					new OleDbParameter("@Barcode", OleDbType.VarChar,50),
+					new OleDbParameter("@NormName", OleDbType.VarChar,50),
+					new OleDbParameter("@Price", OleDbType.Numeric,8),
+					new OleDbParameter("@SumMoney", OleDbType.Numeric,8),
+					new OleDbParameter("@Cnt", OleDbType.Integer,4)};
             parameters[0].Value = SupplyID;
             parameters[1].Value = Barcode;
             parameters[2].Value = NormName;
@@ -199,7 +201,7 @@ namespace Warehouse
             StringBuilder strSql = new StringBuilder();
             strSql.Append("delete from SupplyDetail ");
             //strSql.Append(" where 条件);
-            SqlParameter[] parameters = {
+            OleDbParameter[] parameters = {
 };
 
             DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
@@ -215,7 +217,7 @@ namespace Warehouse
             strSql.Append("select  top 1 SupplyID,Barcode,NormName,Price,SumMoney,Cnt ");
             strSql.Append(" FROM SupplyDetail ");
             //strSql.Append(" where 条件);
-            SqlParameter[] parameters = {
+            OleDbParameter[] parameters = {
 };
 
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);

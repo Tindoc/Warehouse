@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using SqlServerDAL;
 
+using System.Data.OleDb;
+
 namespace Warehouse
 {
     /// <summary>
@@ -101,8 +103,8 @@ namespace Warehouse
             strSql.Append("select * ");
             strSql.Append(" FROM Supply ");
             strSql.Append(" where SupplyID=@SupplyID ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@SupplyID", SqlDbType.VarChar,50)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@SupplyID", OleDbType.VarChar,50)};
             parameters[0].Value = SupplyID;
 
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
@@ -143,9 +145,9 @@ namespace Warehouse
             strSql.Append("select count(1) from Supply");
             strSql.Append(" where SupplyID=@SupplyID and ID=@ID ");
 
-            SqlParameter[] parameters = {
-					new SqlParameter("@SupplyID", SqlDbType.VarChar,50),
-					new SqlParameter("@ID", SqlDbType.Int,4)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@SupplyID", OleDbType.VarChar, 50),
+					new OleDbParameter("@ID", OleDbType.Integer, 4)};
             parameters[0].Value = SupplyID;
             parameters[1].Value = ID;
 
@@ -158,15 +160,15 @@ namespace Warehouse
         /// </summary>
         public int Add(List<SupplyDetail> list)
         {
-            SqlParameter[] parameters = {
-					new SqlParameter("@SupplyID", SupplyID),
-					new SqlParameter("@AgentName", AgentName),
-					new SqlParameter("@Price", Price),
-					new SqlParameter("@Operator", Operator),
-					new SqlParameter("@SumPrice", SumPrice)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@SupplyID", SupplyID),
+                    new OleDbParameter("@Price", Price),
+					new OleDbParameter("@AgentName", AgentName),
+					new OleDbParameter("@Operator", Operator),
+					new OleDbParameter("@SumPrice", SumPrice)};
 
             List<string> sqlT = new List<string>();
-            sqlT.Add("insert into [Supply](SupplyID,AgentName,Price,Operator,SumPrice) values (@SupplyID,@AgentName,@Price,@Operator,@SumPrice);");
+            sqlT.Add("insert into [Supply](SupplyID,Price,AgentName,Operator,SumPrice) values (@SupplyID,@Price,@AgentName,@Operator,@SumPrice);");
             if (list.Count > 0)
             {
                 foreach (SupplyDetail s in list)
@@ -197,14 +199,14 @@ namespace Warehouse
             strSql.Append("CreateTime=@CreateTime,");
             strSql.Append("SumPrice=@SumPrice");
             strSql.Append(" where SupplyID=@SupplyID and ID=@ID ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@ID", SqlDbType.Int,4),
-					new SqlParameter("@SupplyID", SqlDbType.VarChar,50),
-					new SqlParameter("@AgentName", SqlDbType.VarChar,50),
-					new SqlParameter("@Price", SqlDbType.Money,8),
-					new SqlParameter("@Operator", SqlDbType.VarChar,50),
-					new SqlParameter("@CreateTime", SqlDbType.DateTime),
-					new SqlParameter("@SumPrice", SqlDbType.Money,8)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@ID", OleDbType.Integer,4),
+					new OleDbParameter("@SupplyID", OleDbType.VarChar,50),
+					new OleDbParameter("@AgentName", OleDbType.VarChar,50),
+					new OleDbParameter("@Price", OleDbType.Numeric,8),
+					new OleDbParameter("@Operator", OleDbType.VarChar,50),
+					new OleDbParameter("@CreateTime", OleDbType.Date),
+					new OleDbParameter("@SumPrice", OleDbType.Numeric,8)};
             parameters[0].Value = ID;
             parameters[1].Value = SupplyID;
             parameters[2].Value = AgentName;
@@ -221,8 +223,8 @@ namespace Warehouse
         /// </summary>
         public int Delete(string SupplyID)
         {
-            SqlParameter[] parameters = {
-					new SqlParameter("@SupplyID", SupplyID)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@SupplyID", SupplyID)};
 
             List<string> sqlT = new List<string>();
             sqlT.Add("delete from [Supply] where SupplyID=@SupplyID;");
@@ -249,8 +251,8 @@ namespace Warehouse
             strSql.Append("select  top 1 * ");
             strSql.Append(" FROM Supply ");
             strSql.Append(" where SupplyID=@SupplyID ");
-            SqlParameter[] parameters = {
-					new SqlParameter("@SupplyID", SqlDbType.VarChar,50)};
+            OleDbParameter[] parameters = {
+					new OleDbParameter("@SupplyID", OleDbType.VarWChar,50)};
             parameters[0].Value = SupplyID;
 
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
@@ -317,7 +319,8 @@ namespace Warehouse
                 strWhere = " where " + strWhere;
             }
 
-            string strSql = "select TOP " + PageSize + " * FROM [Supply] A ";
+            //string strSql = "select TOP " + PageSize + " * FROM [Supply] A "; // SQL Server 用
+            string strSql = "select TOP " + PageSize + " * FROM [Supply] AS A "; // Access 用
 
             if (PageIndex > 1)
             {
@@ -334,7 +337,8 @@ namespace Warehouse
             }
 
             string strCnt = "SELECT count(id) FROM Supply A " + strWhere;
-            string strSum = "SELECT isnull(sum(SumPrice),0) FROM Supply A " + strWhere;
+            //string strSum = "SELECT isnull(sum(SumPrice),0) FROM Supply A " + strWhere;   // SQL Server 用
+            string strSum = "SELECT iif(isnull(sum(SumPrice)),0, sum(SumPrice)) FROM Supply A " + strWhere; // Access 用
 
 
             count = (int)DbHelperSQL.GetSingle(strCnt);
